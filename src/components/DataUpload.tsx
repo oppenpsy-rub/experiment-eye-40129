@@ -2,6 +2,7 @@ import { Upload, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import * as XLSX from 'xlsx';
 
 interface DataUploadProps {
   onDataLoaded: (data: any[]) => void;
@@ -16,14 +17,14 @@ export const DataUpload = ({ onDataLoaded }: DataUploadProps) => {
     
     reader.onload = (e) => {
       try {
-        const content = e.target?.result as string;
+        const content = e.target?.result;
         
         if (file.name.endsWith('.json')) {
-          const jsonData = JSON.parse(content);
+          const jsonData = JSON.parse(content as string);
           onDataLoaded(Array.isArray(jsonData) ? jsonData : [jsonData]);
           toast.success("JSON-Daten erfolgreich geladen");
         } else if (file.name.endsWith('.csv')) {
-          const lines = content.split('\n');
+          const lines = (content as string).split('\n');
           const headers = lines[0].split(',').map(h => h.trim());
           const data = lines.slice(1).filter(line => line.trim()).map(line => {
             const values = line.split(',');
@@ -35,6 +36,12 @@ export const DataUpload = ({ onDataLoaded }: DataUploadProps) => {
           });
           onDataLoaded(data);
           toast.success("CSV-Daten erfolgreich geladen");
+        } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+          const workbook = XLSX.read(content, { type: 'array' });
+          const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+          const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+          onDataLoaded(jsonData);
+          toast.success("Excel-Daten erfolgreich geladen");
         }
       } catch (error) {
         toast.error("Fehler beim Laden der Datei");
@@ -42,7 +49,11 @@ export const DataUpload = ({ onDataLoaded }: DataUploadProps) => {
       }
     };
 
-    reader.readAsText(file);
+    if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+      reader.readAsArrayBuffer(file);
+    } else {
+      reader.readAsText(file);
+    }
   };
 
   return (
@@ -54,7 +65,7 @@ export const DataUpload = ({ onDataLoaded }: DataUploadProps) => {
         <div className="text-center">
           <h3 className="text-lg font-semibold mb-2">Experimentdaten hochladen</h3>
           <p className="text-sm text-muted-foreground mb-4">
-            CSV oder JSON Dateien unterstützt
+            CSV, JSON oder Excel Dateien unterstützt
           </p>
         </div>
         <label htmlFor="file-upload">
@@ -68,7 +79,7 @@ export const DataUpload = ({ onDataLoaded }: DataUploadProps) => {
         <input
           id="file-upload"
           type="file"
-          accept=".csv,.json"
+          accept=".csv,.json,.xlsx,.xls"
           onChange={handleFileUpload}
           className="hidden"
         />
