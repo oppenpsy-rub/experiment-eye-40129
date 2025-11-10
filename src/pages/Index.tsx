@@ -9,6 +9,7 @@ import { parseExperimentData, parseMentalMapData, getParticipantMentalMaps } fro
 import { ParticipantSelector } from "@/components/ParticipantSelector";
 import { ParticipantProfile } from "@/components/ParticipantProfile";
 import { MentalMapViewer } from "@/components/MentalMapViewer";
+import { MentalMapAnalysis } from "@/components/MentalMapAnalysis";
 import { AdvancedAnalysis } from "@/components/AdvancedAnalysis";
 import { DataTable } from "@/components/DataTable";
 import { Statistics } from "@/components/Statistics";
@@ -110,7 +111,7 @@ const Index = () => {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Übersicht
@@ -122,6 +123,10 @@ const Index = () => {
             <TabsTrigger value="mental-maps" className="flex items-center gap-2">
               <Map className="h-4 w-4" />
               Mental Maps
+            </TabsTrigger>
+            <TabsTrigger value="map-analysis" className="flex items-center gap-2">
+              <Map className="h-4 w-4" />
+              Mental Map Analyse
             </TabsTrigger>
             <TabsTrigger value="analysis" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
@@ -166,6 +171,15 @@ const Index = () => {
               <MentalMapViewer 
                 mentalMaps={selectedMentalMaps}
                 participantCode={selectedParticipant.participantCode}
+              />
+            )}
+          </TabsContent>
+
+          <TabsContent value="map-analysis">
+            {mentalMapData && (
+              <MentalMapAnalysis 
+                mentalMapData={mentalMapData}
+                participants={participants}
               />
             )}
           </TabsContent>
