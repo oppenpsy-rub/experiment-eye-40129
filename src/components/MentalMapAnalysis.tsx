@@ -44,7 +44,7 @@ const calculatePolygonCenter = (coordinates: number[][][]): [number, number] => 
 };
 
 export const MentalMapAnalysis = ({ mentalMapData, participants }: MentalMapAnalysisProps) => {
-  const [selectedQuestion, setSelectedQuestion] = useState<string>('all');
+  const [selectedQuestion, setSelectedQuestion] = useState<string>(() => 'all');
 
   const questionStats = useMemo(() => {
     const stats: Record<string, { count: number; avgArea: number; centers: [number, number][] }> = {};

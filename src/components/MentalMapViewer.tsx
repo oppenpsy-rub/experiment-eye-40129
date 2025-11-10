@@ -27,7 +27,7 @@ const QUESTION_LABELS: Record<string, string> = {
 export const MentalMapViewer = ({ mentalMaps, participantCode }: MentalMapViewerProps) => {
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selectedQuestion, setSelectedQuestion] = useState<string>('all');
+  const [selectedQuestion, setSelectedQuestion] = useState<string>(() => 'all');
 
   const uniqueQuestions = Array.from(new Set(mentalMaps.map(m => m.properties.question_id)));
   

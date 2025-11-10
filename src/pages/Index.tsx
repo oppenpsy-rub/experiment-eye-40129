@@ -10,6 +10,7 @@ import { ParticipantSelector } from "@/components/ParticipantSelector";
 import { ParticipantProfile } from "@/components/ParticipantProfile";
 import { MentalMapViewer } from "@/components/MentalMapViewer";
 import { MentalMapAnalysis } from "@/components/MentalMapAnalysis";
+import { MentalMapHeatmap } from "@/components/MentalMapHeatmap";
 import { AdvancedAnalysis } from "@/components/AdvancedAnalysis";
 import { DataTable } from "@/components/DataTable";
 import { Statistics } from "@/components/Statistics";
@@ -111,7 +112,7 @@ const Index = () => {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Übersicht
@@ -124,9 +125,13 @@ const Index = () => {
               <Map className="h-4 w-4" />
               Mental Maps
             </TabsTrigger>
+            <TabsTrigger value="heatmap" className="flex items-center gap-2">
+              <Map className="h-4 w-4" />
+              Heatmap
+            </TabsTrigger>
             <TabsTrigger value="map-analysis" className="flex items-center gap-2">
               <Map className="h-4 w-4" />
-              Mental Map Analyse
+              Map Analyse
             </TabsTrigger>
             <TabsTrigger value="analysis" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
@@ -172,6 +177,12 @@ const Index = () => {
                 mentalMaps={selectedMentalMaps}
                 participantCode={selectedParticipant.participantCode}
               />
+            )}
+          </TabsContent>
+
+          <TabsContent value="heatmap">
+            {mentalMapData && (
+              <MentalMapHeatmap mentalMapData={mentalMapData} />
             )}
           </TabsContent>
 

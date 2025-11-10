@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { User, MapPin, GraduationCap, Languages, Mic } from "lucide-react";
 import { ParticipantData } from "@/types/experiment";
 import { calculateParticipantStats } from "@/utils/dataParser";
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from "recharts";
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 interface ParticipantProfileProps {
   participant: ParticipantData;
@@ -14,10 +14,19 @@ export const ParticipantProfile = ({ participant }: ParticipantProfileProps) => 
   const stats = calculateParticipantStats(participant);
 
   const radarData = [
-    { subject: 'Sympathie', value: stats.averageSympathy * 10 },
-    { subject: 'Korrektheit', value: stats.averageCorrectness * 10 },
-    { subject: 'Lehreignung', value: stats.averageTeacherSuitability * 10 },
+    { subject: 'Sympathie', value: stats.averageSympathy },
+    { subject: 'Korrektheit', value: stats.averageCorrectness },
+    { subject: 'Lehreignung', value: stats.averageTeacherSuitability },
   ];
+
+  const stimulusChartData = participant.stimulusRatings
+    .filter(r => r.sympathyRating > 0)
+    .map(rating => ({
+      stimulus: `Stimulus ${rating.stimulusNumber}`,
+      Sympathie: rating.sympathyRating,
+      Korrektheit: rating.correctnessRating,
+      Lehreignung: rating.teacherSuitabilityRating,
+    }));
 
   return (
     <Card className="p-6">
@@ -148,15 +157,50 @@ export const ParticipantProfile = ({ participant }: ParticipantProfileProps) => 
             </div>
           </div>
 
-          <div className="h-[300px] mb-6">
-            <ResponsiveContainer width="100%" height="100%">
-              <RadarChart data={radarData}>
-                <PolarGrid />
-                <PolarAngleAxis dataKey="subject" />
-                <PolarRadiusAxis angle={90} domain={[0, 100]} />
-                <Radar name="Bewertungen" dataKey="value" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.6} />
-              </RadarChart>
-            </ResponsiveContainer>
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div>
+              <h4 className="text-sm font-semibold mb-3">Durchschnittliche Bewertungen</h4>
+              <div className="h-[250px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart data={radarData}>
+                    <PolarGrid stroke="hsl(var(--border))" />
+                    <PolarAngleAxis dataKey="subject" tick={{ fill: 'hsl(var(--foreground))' }} />
+                    <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                    <Radar 
+                      name="Bewertungen" 
+                      dataKey="value" 
+                      stroke="hsl(var(--primary))" 
+                      fill="hsl(var(--primary))" 
+                      fillOpacity={0.5} 
+                    />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-3">Bewertungen nach Stimulus</h4>
+              <div className="h-[250px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={stimulusChartData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <XAxis dataKey="stimulus" tick={{ fill: 'hsl(var(--foreground))' }} />
+                    <YAxis domain={[0, 10]} tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'hsl(var(--background))', 
+                        border: '1px solid hsl(var(--border))',
+                        borderRadius: '6px'
+                      }} 
+                    />
+                    <Legend />
+                    <Bar dataKey="Sympathie" fill="hsl(var(--chart-1))" />
+                    <Bar dataKey="Korrektheit" fill="hsl(var(--chart-2))" />
+                    <Bar dataKey="Lehreignung" fill="hsl(var(--chart-3))" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </div>
 
           <div className="space-y-2">
