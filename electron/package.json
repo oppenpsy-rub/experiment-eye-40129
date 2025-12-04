@@ -19,13 +19,7 @@
     "files": [
       "main.js",
       "package.json",
-      {
-        "from": "dist",
-        "to": "dist",
-        "filter": [
-          "**/*"
-        ]
-      }
+      "dist/**/*"
     ],
     "win": {
       "target": [
@@ -53,7 +47,7 @@
         "dmg",
         "zip"
       ],
-      "icon": "../src-tauri/icons/icon.icns",
+      "icon": "icon.icns",
       "hardenedRuntime": false,
       "gatekeeperAssess": false
     }
