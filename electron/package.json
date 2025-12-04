@@ -7,7 +7,7 @@
     "dev": "electron .",
     "build:win": "electron-builder --win nsis",
     "build:mac": "electron-builder --mac dmg",
-    "build:mac:universal": "electron-builder --mac universal dmg zip",
+    "build:mac:universal": "electron-builder --mac dmg zip --arch universal",
     "build": "electron-builder"
   },
   "build": {
