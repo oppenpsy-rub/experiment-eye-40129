@@ -42,6 +42,8 @@ jobs:
           npm --prefix electron ci --no-audit --no-fund || npm --prefix electron install --no-audit --no-fund
 
       - name: Build macOS Universal (DMG & ZIP)
+        env:
+          DEBUG: electron-builder
         run: npm run electron:build:mac:universal
 
       - name: Upload DMG artifact
