@@ -17,9 +17,10 @@
       "output": "../electron-dist"
     },
     "files": [
+      "package.json",
       "main.js",
       {
-        "from": "../dist",
+        "from": "dist",
         "to": "dist",
         "filter": [
           "**/*"

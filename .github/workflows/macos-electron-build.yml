@@ -32,6 +32,11 @@ jobs:
       - name: Build frontend assets
         run: npm run build
 
+      - name: Prepare Electron assets
+        run: |
+          rm -rf electron/dist
+          cp -R dist electron/dist
+
       - name: Install Electron subproject dependencies
         run: |
           npm --prefix electron ci --no-audit --no-fund || npm --prefix electron install --no-audit --no-fund
