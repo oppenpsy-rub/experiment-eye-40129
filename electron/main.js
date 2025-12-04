@@ -25,6 +25,12 @@ function createLogger() {
 }
 const log = createLogger();
 
+// Loosen CORS/file restrictions for local file:// ESM modules and assets
+try {
+  app.commandLine.appendSwitch('allow-file-access-from-files');
+  app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors');
+} catch {}
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1280,
@@ -36,6 +42,8 @@ function createWindow() {
       // Relax security for local file:// scheme so ESM and asset loading work reliably
       // This app does not load remote content.
       webSecurity: false,
+      allowRunningInsecureContent: true,
+      sandbox: false,
     },
   });
 
@@ -85,7 +93,10 @@ function createWindow() {
     setTimeout(() => {
       const js2 = `(() => {
         const root = document.getElementById('root');
-        return { rootExists: !!root, rootChildren: root ? root.children.length : -1 };
+        const scripts = Array.from(document.scripts).map(s => s.src || '(inline)');
+        const links = Array.from(document.querySelectorAll('link[rel="modulepreload"],link[rel="preload"],link[rel="stylesheet"]')).map(l => ({rel:l.rel, href:l.href}));
+        console.log('[renderer] assets', { scripts, links });
+        return { rootExists: !!root, rootChildren: root ? root.children.length : -1, scripts, links };
       })()`;
       win.webContents.executeJavaScript(js2).then((info2) => {
         log('[electron] boot-info-late:', info2);
