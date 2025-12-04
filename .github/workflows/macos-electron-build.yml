@@ -49,20 +49,38 @@ jobs:
         run: |
           npm --prefix electron ci --no-audit --no-fund || npm --prefix electron install --no-audit --no-fund
 
-      - name: "Build macOS (DMG & ZIP)"
+      - name: "Build macOS arm64 (DMG & ZIP)"
         env:
           DEBUG: electron-builder
         working-directory: electron
-        run: npx electron-builder --projectDir=. --mac dmg zip --publish=never
+        run: npx electron-builder --projectDir=. --mac dmg zip --arm64 --publish=never
 
-      - name: Upload DMG artifact
+      - name: "Build macOS x64 (DMG & ZIP)"
+        env:
+          DEBUG: electron-builder
+        working-directory: electron
+        run: npx electron-builder --projectDir=. --mac dmg zip --x64 --publish=never
+
+      - name: Upload DMG artifact (arm64)
         uses: actions/upload-artifact@v4
         with:
-          name: macos-dmg
-          path: electron-dist/*.dmg
+          name: macos-dmg-arm64
+          path: electron-dist/*-arm64.dmg
 
-      - name: Upload ZIP artifact
+      - name: Upload DMG artifact (x64)
         uses: actions/upload-artifact@v4
         with:
-          name: macos-zip
-          path: electron-dist/*.zip
+          name: macos-dmg-x64
+          path: electron-dist/*-x64.dmg
+
+      - name: Upload ZIP artifact (arm64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-zip-arm64
+          path: electron-dist/*-arm64.zip
+
+      - name: Upload ZIP artifact (x64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-zip-x64
+          path: electron-dist/*-x64.zip
