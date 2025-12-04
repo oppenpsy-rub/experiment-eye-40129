@@ -33,6 +33,9 @@ function createWindow() {
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
+      // Relax security for local file:// scheme so ESM and asset loading work reliably
+      // This app does not load remote content.
+      webSecurity: false,
     },
   });
 
