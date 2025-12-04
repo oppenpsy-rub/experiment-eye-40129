@@ -53,6 +53,24 @@ function createWindow() {
 
   win.webContents.on('did-finish-load', () => {
     log('[electron] did-finish-load:', fileUrl);
+    // Inspect renderer DOM to diagnose blank screen without relying on DevTools
+    const js = `(() => {
+      const root = document.getElementById('root');
+      const info = {
+        title: document.title,
+        bodyChildren: document.body ? document.body.children.length : -1,
+        rootExists: !!root,
+        rootChildren: root ? root.children.length : -1,
+        bodyHTMLPreview: document.body ? document.body.innerHTML.slice(0, 300) : ''
+      };
+      console.log('[renderer] boot-info', info);
+      return info;
+    })()`;
+    win.webContents.executeJavaScript(js).then((info) => {
+      try { log('[electron] boot-info:', info); } catch {}
+    }).catch((err) => {
+      log('[electron] executeJavaScript error:', err && err.message ? err.message : String(err));
+    });
   });
 
   win.on('unresponsive', () => {
