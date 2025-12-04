@@ -19,19 +19,7 @@
     },
     "beforePack": "./build-hooks/beforePack.js",
     "afterPack": "./build-hooks/afterPack.js",
-    "asar": false,
-    "files": [
-      "main.js",
-      "package.json",
-      "dist/**/*",
-      "build-hooks/**/*"
-    ],
-    "extraFiles": [
-      {
-        "from": "main.js",
-        "to": "."
-      }
-    ],
+    "asar": true,
     "win": {
       "target": [
         {
