@@ -52,8 +52,7 @@ jobs:
       - name: "Build macOS (DMG & ZIP)"
         env:
           DEBUG: electron-builder
-        working-directory: electron
-        run: npm run build:mac
+        run: npx electron-builder --projectDir=electron --mac dmg zip --publish=never
 
       - name: Upload DMG artifact
         uses: actions/upload-artifact@v4
