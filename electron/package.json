@@ -26,6 +26,12 @@
       "dist/**/*",
       "build-hooks/**/*"
     ],
+    "extraFiles": [
+      {
+        "from": "main.js",
+        "to": "."
+      }
+    ],
     "win": {
       "target": [
         {
