@@ -21,7 +21,10 @@
     "afterPack": "./build-hooks/afterPack.js",
     "asar": false,
     "files": [
-      "**/*"
+      "main.js",
+      "package.json",
+      "dist/**/*",
+      "build-hooks/**/*"
     ],
     "win": {
       "target": [

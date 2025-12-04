@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = async function beforePack(context) {
   try {
-    const appDir = context.appDir;
+    const appDir = (context && (context.appDir || (context.packager && context.packager.appDir))) || process.cwd();
     const mainPath = path.join(appDir, 'main.js');
     const indexPath = path.join(appDir, 'dist', 'index.html');
     const pkgPath = path.join(appDir, 'package.json');
@@ -23,9 +23,10 @@ module.exports = async function beforePack(context) {
     try {
       const entries = fs.readdirSync(appDir);
       console.log('[beforePack] appDir entries:', entries);
-    } catch {}
+    } catch (e) {
+      console.log('[beforePack] readdir appDir error:', e && e.message ? e.message : e);
+    }
   } catch (e) {
     console.log('[beforePack] error:', e && e.message ? e.message : e);
   }
 };
-
