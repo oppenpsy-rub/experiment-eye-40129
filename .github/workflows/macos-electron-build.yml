@@ -36,6 +36,8 @@ jobs:
         run: |
           rm -rf electron/dist
           cp -R dist electron/dist
+          # Copy macOS icon into electron/ so electron-builder can resolve it without leaving root
+          cp -f src-tauri/icons/icon.icns electron/icon.icns || true
 
       - name: Install Electron subproject dependencies
         run: |

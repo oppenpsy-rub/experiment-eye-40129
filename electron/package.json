@@ -17,7 +17,15 @@
       "output": "../electron-dist"
     },
     "files": [
-      "**/*"
+      "main.js",
+      "package.json",
+      {
+        "from": "dist",
+        "to": "dist",
+        "filter": [
+          "**/*"
+        ]
+      }
     ],
     "win": {
       "target": [
