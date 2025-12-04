@@ -17,6 +17,7 @@
       "app": ".",
       "output": "../electron-dist"
     },
+    "beforePack": "./build-hooks/beforePack.js",
     "asar": false,
     "files": [
       "**/*"
