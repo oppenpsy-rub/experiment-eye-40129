@@ -14,8 +14,10 @@
     "appId": "de.floem.perzeptionsexperimente",
     "productName": "Forschungsdaten-Analyseplattform",
     "directories": {
+      "app": ".",
       "output": "../electron-dist"
     },
+    "asar": true,
     "files": [
       "main.js",
       "package.json",

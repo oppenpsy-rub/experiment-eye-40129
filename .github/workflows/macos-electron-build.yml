@@ -39,6 +39,12 @@ jobs:
           # Copy macOS icon into electron/ so electron-builder can resolve it without leaving root
           cp -f src-tauri/icons/icon.icns electron/icon.icns || true
 
+      - name: Debug: List Electron app files
+        run: |
+          echo "Root files:" && ls -la
+          echo "Electron files:" && ls -la electron
+          echo "Electron dist files:" && ls -la electron/dist || true
+
       - name: Install Electron subproject dependencies
         run: |
           npm --prefix electron ci --no-audit --no-fund || npm --prefix electron install --no-audit --no-fund
