@@ -20,6 +20,9 @@
     "beforePack": "./build-hooks/beforePack.js",
     "afterPack": "./build-hooks/afterPack.js",
     "asar": true,
+    "files": [
+      "**/*"
+    ],
     "win": {
       "target": [
         {
