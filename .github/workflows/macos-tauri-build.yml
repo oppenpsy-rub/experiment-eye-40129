@@ -1,0 +1,41 @@
+name: Build macOS Tauri (DMG)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-macos:
+    runs-on: macos-13
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend (Vite)
+        run: npm run build
+
+      - name: Install Tauri CLI (v1)
+        run: cargo install tauri-cli --locked --version 1.5.6
+
+      - name: Build Tauri app (macOS)
+        run: cargo tauri build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-macos-artifacts
+          path: |
+            src-tauri/target/release/bundle/dmg/**
+            src-tauri/target/release/bundle/macos/**

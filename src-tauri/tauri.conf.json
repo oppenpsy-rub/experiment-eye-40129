@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/tauri-apps/tauri/v1/schema/tauri.schema.json",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "Forschungsdaten-Analyseplattform",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "windows": [
+      {
+        "title": "Forschungsdaten-Analyseplattform",
+        "width": 1280,
+        "height": 800,
+        "resizable": true,
+        "url": "tauri://localhost/index.html"
+      }
+    ],
+    "bundle": {
+      "identifier": "de.opp.perzeption",
+      "targets": ["dmg", "app", "msi", "nsis"],
+      "resources": [
+        "resources/**"
+      ]
+    }
+  }
+}
