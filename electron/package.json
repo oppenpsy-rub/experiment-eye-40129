@@ -17,11 +17,9 @@
       "app": ".",
       "output": "../electron-dist"
     },
-    "asar": true,
+    "asar": false,
     "files": [
-      "main.js",
-      "package.json",
-      "dist/**/*"
+      "**/*"
     ],
     "win": {
       "target": [
