@@ -58,6 +58,12 @@ function createWindow() {
     log('[electron] did-finish-load:', fileUrl);
     // Inspect renderer DOM to diagnose blank screen without relying on DevTools
     const js = `(() => {
+      window.addEventListener('error', (e) => {
+        console.error('[renderer] window.error', e && e.message ? e.message : String(e));
+      });
+      window.addEventListener('unhandledrejection', (e) => {
+        console.error('[renderer] unhandledrejection', e && e.reason ? (e.reason.message || String(e.reason)) : String(e));
+      });
       const root = document.getElementById('root');
       const info = {
         title: document.title,
@@ -74,6 +80,19 @@ function createWindow() {
     }).catch((err) => {
       log('[electron] executeJavaScript error:', err && err.message ? err.message : String(err));
     });
+
+    // Re-check after a short delay to catch late mounts
+    setTimeout(() => {
+      const js2 = `(() => {
+        const root = document.getElementById('root');
+        return { rootExists: !!root, rootChildren: root ? root.children.length : -1 };
+      })()`;
+      win.webContents.executeJavaScript(js2).then((info2) => {
+        log('[electron] boot-info-late:', info2);
+      }).catch((err) => {
+        log('[electron] executeJavaScript late error:', err && err.message ? err.message : String(err));
+      });
+    }, 1000);
   });
 
   win.on('unresponsive', () => {
