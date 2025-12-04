@@ -1,24 +1,22 @@
-# Welcome to your Lovable project
+# Forschungsdaten-Analyseplattform
 
-## Project info
+## Projektinfo
 
-**URL**: https://lovable.dev/projects/ac64f6cb-be52-4675-a26a-350f7afe3e26
+Dies ist die Desktop-Variante der Forschungsdaten-Analyseplattform.
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
+**Lovable verwenden**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ac64f6cb-be52-4675-a26a-350f7afe3e26) and start prompting.
+Besuche das [Lovable Projekt](https://lovable.dev/projects/ac64f6cb-be52-4675-a26a-350f7afe3e26) und starte mit Prompts.
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
+**IDE lokal verwenden**
 
 If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Voraussetzung ist Node.js & npm – [Installation mit nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
 Follow these steps:
 
@@ -32,17 +30,19 @@ cd <YOUR_PROJECT_NAME>
 # Step 3: Install the necessary dependencies.
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Step 4: Starten Sie die Tauri-Entwicklung oder Electron-Variante.
+npm run tauri:dev
+# oder Electron:
+npm run electron:dev
 ```
 
-**Edit a file directly in GitHub**
+**Dateien direkt in GitHub bearbeiten**
 
 - Navigate to the desired file(s).
 - Click the "Edit" button (pencil icon) at the top right of the file view.
 - Make your changes and commit the changes.
 
-**Use GitHub Codespaces**
+**GitHub Codespaces verwenden**
 
 - Navigate to the main page of your repository.
 - Click on the "Code" button (green button) near the top right.
@@ -50,7 +50,7 @@ npm run dev
 - Click on "New codespace" to launch a new Codespace environment.
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## What technologies are used for this project?
+## Verwendete Technologien
 
 This project is built with:
 
@@ -60,14 +60,49 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## Deployment
 
 Simply open [Lovable](https://lovable.dev/projects/ac64f6cb-be52-4675-a26a-350f7afe3e26) and click on Share -> Publish.
 
-## Can I connect a custom domain to my Lovable project?
+## Custom Domain
 
 Yes, you can!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Mehr dazu: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+## Desktop-Alternative: Electron
+
+Falls die Tauri-WebView unter Windows blockiert (z. B. Policies oder Runtime-Probleme), steht eine Electron-Variante bereit, die ausschließlich die gebauten, lokalen `dist`-Assets lädt und ohne Dev-Server funktioniert.
+
+- Frontend-Assets bauen: `npm run build`
+- Electron lokal starten: `npm run electron:dev`
+- Windows Portable-EXE erstellen: `npm run electron:build:win`
+- macOS DMG erstellen (ein Architekturziel): `npm run electron:build:mac`
+- macOS Universal-Build (DMG & ZIP, x64+arm64): `npm run electron:build:mac:universal`
+
+Hinweise:
+- Für macOS-Builds ist ein macOS-System erforderlich (Code Signing optional, empfohlen für Verteilen).
+- Universal-Build erfordert einen macOS-Host; auf Windows nicht möglich.
+- Ohne Signierung kann Gatekeeper blockieren – App öffnen via Rechtsklick → Öffnen.
+- Die Electron-App lädt `dist/index.html` direkt via `file://`, somit sind keine Netzwerkverbindungen nötig.
+
+### macOS Universal-Build via GitHub Actions (ohne eigenen Mac)
+
+Wenn du keinen Mac zur Verfügung hast, kannst du den Build in GitHub ausführen:
+
+1. Stelle sicher, dass dein Repo in GitHub liegt und die Workflow-Datei vorhanden ist: `.github/workflows/macos-electron-build.yml`.
+2. Öffne dein Repository in GitHub → `Actions` → Workflow "macOS Universal Electron Build".
+3. Klicke auf `Run workflow`.
+4. Nach Abschluss findest du die Artefakte unter dem jeweiligen Workflow-Lauf:
+   - `macos-universal-dmg` (DMG)
+   - `macos-universal-zip` (ZIP mit `.app`)
+
+Verteilen:
+- DMG: per Doppelklick öffnen, App ins `Programme`-Verzeichnis ziehen.
+- ZIP: entpacken und `Forschungsdaten-Analyseplattform.app` direkt starten.
+
+Hinweis zu Gatekeeper:
+- Unsigned/Unnotarized Apps: Rechtsklick → Öffnen (einmalig bestätigen).
+- Für breite Verteilung empfiehlt sich Signierung & Notarisierung (Apple Developer).

@@ -1,0 +1,41 @@
+name: macOS Universal Electron Build
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Install Electron subproject dependencies
+        run: npm --prefix electron ci
+
+      - name: Build macOS Universal (DMG & ZIP)
+        run: npm run electron:build:mac:universal -- --publish=never
+
+      - name: Upload DMG artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-universal-dmg
+          path: electron-dist/*.dmg
+
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-universal-zip
+          path: electron-dist/*.zip
+

@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Electron build artifacts
+electron-dist/
+
+# Tauri build artifacts
+src-tauri/target/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,0 +1,65 @@
+{
+  "name": "perzeptionsexperimente-auswertung-electron",
+  "version": "0.1.0",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "dev": "electron .",
+    "build:win": "electron-builder --win nsis",
+    "build:mac": "electron-builder --mac dmg",
+    "build:mac:universal": "electron-builder --mac universal dmg zip",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "de.floem.perzeptionsexperimente",
+    "productName": "Forschungsdaten-Analyseplattform",
+    "directories": {
+      "output": "../electron-dist"
+    },
+    "files": [
+      "main.js",
+      {
+        "from": "../dist",
+        "to": "dist",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "../src-tauri/icons/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "unicode": true,
+      "shortcutName": "Forschungsdaten-Analyseplattform",
+      "runAfterFinish": true
+    },
+    "mac": {
+      "category": "public.app-category.education",
+      "artifactName": "Forschungsdaten-Analyseplattform-${version}-${arch}.${ext}",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "../src-tauri/icons/icon.icns",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.8.0"
+  },
+  "dependencies": {}
+}
