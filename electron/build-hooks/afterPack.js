@@ -1,5 +1,9 @@
 const fs = require('fs');
 const path = require('path');
+let asar;
+try {
+  asar = require('asar');
+} catch {}
 
 module.exports = async function afterPack(context) {
   try {
@@ -27,6 +31,7 @@ module.exports = async function afterPack(context) {
 
     const appBundlePath = path.join(appOutDir, appBundle);
   const resourcesAppPath = path.join(appBundlePath, 'Contents', 'Resources', 'app');
+  const resourcesAppAsarPath = path.join(appBundlePath, 'Contents', 'Resources', 'app.asar');
   const mainPath = path.join(resourcesAppPath, 'main.js');
   const indexPath = path.join(resourcesAppPath, 'dist', 'index.html');
 
@@ -38,6 +43,43 @@ module.exports = async function afterPack(context) {
   console.log('[afterPack] Resources/app exists:', resourcesExists);
   console.log('[afterPack] Resources/app/main.js exists:', mainExists);
   console.log('[afterPack] Resources/app/dist/index.html exists:', indexExists);
+  const asarExists = fs.existsSync(resourcesAppAsarPath);
+  console.log('[afterPack] Resources/app.asar exists:', asarExists);
+  if (asarExists && asar) {
+    try {
+      // Inspect package.json inside app.asar
+      const pkgBuf = asar.extractFile(resourcesAppAsarPath, 'package.json');
+      const pkgJson = JSON.parse(pkgBuf.toString('utf8'));
+      const pkgMain = pkgJson && pkgJson.main ? pkgJson.main : null;
+      console.log('[afterPack] app.asar package.json main:', pkgMain);
+      // Check presence of main.js and the declared main
+      let asarHasMainJs = false;
+      let asarHasDeclaredMain = false;
+      try {
+        const test = asar.extractFile(resourcesAppAsarPath, 'main.js');
+        asarHasMainJs = Buffer.isBuffer(test);
+      } catch {}
+      if (pkgMain) {
+        try {
+          const test2 = asar.extractFile(resourcesAppAsarPath, pkgMain);
+          asarHasDeclaredMain = Buffer.isBuffer(test2);
+        } catch {}
+      }
+      console.log('[afterPack] app.asar has top-level main.js:', asarHasMainJs);
+      console.log('[afterPack] app.asar has declared main path:', asarHasDeclaredMain);
+      // Check index.html within dist inside asar
+      let asarHasIndexHtml = false;
+      try {
+        const idx = asar.extractFile(resourcesAppAsarPath, 'dist/index.html');
+        asarHasIndexHtml = Buffer.isBuffer(idx);
+      } catch {}
+      console.log('[afterPack] app.asar has dist/index.html:', asarHasIndexHtml);
+    } catch (e) {
+      console.log('[afterPack] error inspecting app.asar:', e && e.message ? e.message : e);
+    }
+  } else if (asarExists && !asar) {
+    console.log('[afterPack] asar module not available; cannot inspect app.asar contents');
+  }
 
     // If main.js is missing, try to copy it from the project appDir as a safeguard
     if (resourcesExists && !mainExists) {
