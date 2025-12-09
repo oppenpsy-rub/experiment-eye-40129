@@ -1,0 +1,114 @@
+﻿2025-12-04T14:54:53.6848860Z ##[group]Run npm run build:mac:universal
+2025-12-04T14:54:53.6849350Z [36;1mnpm run build:mac:universal[0m
+2025-12-04T14:54:53.6901370Z shell: /bin/bash -e {0}
+2025-12-04T14:54:53.6901790Z env:
+2025-12-04T14:54:53.6902020Z   DEBUG: electron-builder
+2025-12-04T14:54:53.6902170Z ##[endgroup]
+2025-12-04T14:54:54.2484930Z 
+2025-12-04T14:54:54.2587900Z > perzeptionsexperimente-auswertung-electron@0.1.0 build:mac:universal
+2025-12-04T14:54:54.2699130Z > electron-builder --projectDir=. --mac dmg zip --universal --publish=never
+2025-12-04T14:54:54.2864760Z 
+2025-12-04T14:54:55.7377980Z   • electron-builder  version=24.13.3 os=24.6.0
+2025-12-04T14:54:55.7399350Z   • loaded configuration  file=package.json ("build" field)
+2025-12-04T14:54:55.7419210Z   • effective config  config=directories:
+2025-12-04T14:54:55.7420120Z   output: ../electron-dist
+2025-12-04T14:54:55.7420890Z   buildResources: build
+2025-12-04T14:54:55.7421780Z   app: .
+2025-12-04T14:54:55.7422560Z appId: de.floem.perzeptionsexperimente
+2025-12-04T14:54:55.7423910Z productName: Forschungsdaten-Analyseplattform
+2025-12-04T14:54:55.7425360Z beforePack: ./build-hooks/beforePack.js
+2025-12-04T14:54:55.7425930Z afterPack: ./build-hooks/afterPack.js
+2025-12-04T14:54:55.7426350Z asar: false
+2025-12-04T14:54:55.7426620Z files:
+2025-12-04T14:54:55.7426810Z   - filter:
+2025-12-04T14:54:55.7427140Z       - '**/*'
+2025-12-04T14:54:55.7427380Z win:
+2025-12-04T14:54:55.7427600Z   target:
+2025-12-04T14:54:55.7427840Z     - target: nsis
+2025-12-04T14:54:55.7428030Z       arch:
+2025-12-04T14:54:55.7428260Z         - x64
+2025-12-04T14:54:55.7428620Z   icon: ../src-tauri/icons/icon.ico
+2025-12-04T14:54:55.7428920Z nsis:
+2025-12-04T14:54:55.7429150Z   oneClick: false
+2025-12-04T14:54:55.7429430Z   perMachine: true
+2025-12-04T14:54:55.7429680Z   allowToChangeInstallationDirectory: true
+2025-12-04T14:54:55.7429990Z   unicode: true
+2025-12-04T14:54:55.7430690Z   shortcutName: Forschungsdaten-Analyseplattform
+2025-12-04T14:54:55.7439310Z   runAfterFinish: true
+2025-12-04T14:54:55.7440090Z mac:
+2025-12-04T14:54:55.7440300Z   category: public.app-category.education
+2025-12-04T14:54:55.7440860Z   artifactName: Forschungsdaten-Analyseplattform-${version}-${arch}.${ext}
+2025-12-04T14:54:55.7451110Z   target:
+2025-12-04T14:54:55.7452150Z     - dmg
+2025-12-04T14:54:55.7453130Z     - zip
+2025-12-04T14:54:55.7453580Z   icon: icon.icns
+2025-12-04T14:54:55.7453790Z   hardenedRuntime: false
+2025-12-04T14:54:55.7454050Z   gatekeeperAssess: false
+2025-12-04T14:54:55.7454220Z 
+2025-12-04T14:54:55.7454800Z   • Specified application directory equals to project dir — superfluous or wrong configuration  appDirectory=.
+2025-12-04T14:54:55.7455790Z   • description is missed in the package.json  appPackageFile=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/package.json
+2025-12-04T14:54:55.7456720Z   • author is missed in the package.json  appPackageFile=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/package.json
+2025-12-04T14:54:56.0216350Z [beforePack] error: The "path" argument must be of type string. Received undefined
+2025-12-04T14:54:56.0243700Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 node-dep-tree --dir /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron
+2025-12-04T14:54:56.1040630Z   • exited          command=app-builder_arm64 code=0 pid=2013 out=[]
+2025-12-04T14:54:56.1050940Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 rebuild-node-modules cwd=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron
+2025-12-04T14:54:56.1142900Z   • no native dependencies  
+2025-12-04T14:54:56.1153650Z   • exited          command=app-builder_arm64 code=0 pid=2014
+2025-12-04T14:54:56.1157190Z   • packaging       platform=darwin arch=x64 electron=31.7.7 appOutDir=dist/mac-universal-x64-temp
+2025-12-04T14:54:56.1162850Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 unpack-electron --configuration [{"platform":"darwin","arch":"x64","version":"31.7.7"}] --output /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp --distMacOsAppName Electron.app
+2025-12-04T14:54:56.1254320Z   • map async       taskCount=2
+2025-12-04T14:54:56.1277510Z   • map async       taskCount=1
+2025-12-04T14:54:56.6812560Z   • computing effective URL  initialUrl=https://github.com/electron/electron/releases/download/v31.7.7/electron-v31.7.7-darwin-x64.zip
+2025-12-04T14:54:56.6826550Z                              currentUrl=https://release-assets.githubusercontent.com/github-production-release-asset/9384267/eaec679e-cfdd-4fab-9d6c-a8a1730a024d?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-12-04T15%3A44%3A10Z&rscd=attachment%3B+filename%3Delectron-v31.7.7-darwin-x64.zip&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-12-04T14%3A43%3A46Z&ske=2025-12-04T15%3A44%3A10Z&sks=b&skv=2018-11-09&sig=4Df8Bp91GgMZsHiFwknhvTfrxZyMgpsFSxsiTKZqymA%3D&jwt=***
+2025-12-04T14:54:56.7103610Z   • downloading     url=https://github.com/electron/electron/releases/download/v31.7.7/electron-v31.7.7-darwin-x64.zip length=102698847 contentType=application/octet-stream
+2025-12-04T14:54:56.7107100Z   • downloading     url=https://github.com/electron/electron/releases/download/v31.7.7/electron-v31.7.7-darwin-x64.zip size=103 MB parts=6
+2025-12-04T14:54:56.7108720Z   • map async       taskCount=6
+2025-12-04T14:54:56.7109690Z   • download part   range=bytes=85582370-102698846 index=5
+2025-12-04T14:54:56.7110660Z   • download part   range=bytes=17116474-34232947 index=1
+2025-12-04T14:54:56.7111620Z   • download part   range=bytes=34232948-51349421 index=2
+2025-12-04T14:54:56.7112670Z   • download part   range=bytes=51349422-68465895 index=3
+2025-12-04T14:54:56.7113640Z   • download part   range=bytes=68465896-85582369 index=4
+2025-12-04T14:54:56.7114720Z   • download part   range=bytes=0-17116473 index=0
+2025-12-04T14:54:58.0136780Z   • downloaded      url=https://github.com/electron/electron/releases/download/v31.7.7/electron-v31.7.7-darwin-x64.zip duration=1.882s
+2025-12-04T14:54:58.0266680Z   • map async       taskCount=255
+2025-12-04T14:55:00.4842210Z   • exited          command=app-builder_arm64 code=0 pid=2015
+2025-12-04T14:55:00.4956680Z   • asar usage is disabled — this is strongly not recommended  solution=enable asar and use asarUnpack to unpack files that must be externally available
+2025-12-04T14:55:00.5310980Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 decode-plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Electron.app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Electron.app/Contents/Frameworks/Electron Helper.app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Electron.app/Contents/Frameworks/Electron Helper EH.app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Electron.app/Contents/Frameworks/Electron Helper NP.app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Electron.app/Contents/Frameworks/Electron Helper (Renderer).app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Electron.app/Contents/Frameworks/Electron Helper (Plugin).app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Electron.app/Contents/Frameworks/Electron Helper (GPU).app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Electron.app/Contents/Library/LoginItems/Electron Login Helper.app/Contents/Info.plist
+2025-12-04T14:55:00.5544770Z   • map async       taskCount=8
+2025-12-04T14:55:00.5676660Z   • exited          command=app-builder_arm64 code=0 pid=2077 out=[{"DTSDKName":"macosx14.5","DTXcode":"1540","LSMinimumSystemVersion":"10.15","NSAppTransportSecurity":{"NSAllowsArbitraryLoads":true},"CFBundleName":"Electron","CFBundleShortVersionString":"31.7.7","LSEnvironment":{"MallocNanoZone":"0"},"CFBundleIdentifier":"com.github.Electron","LSApplicationCategoryType":"public.app-category.developer-tools","NSHighResolutionCapable":true,"CFBundleExecutable":"Electron","CFBundleIconFile":"electron.icns","DTSDKBuild":"23F73","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTXcodeBuild":"15F31d","NSMicrophoneUsageDescription":"This app needs access to the microphone","NSQuitAlwaysKeepsWindows":false,"CFBundlePackageType":"APPL","CFBundleInfoDictionaryVersion":"6.0","NSBluetoothAlwaysUsageDescription":"This app needs access to Bluetooth","NSBluetoothPeripheralUsageDescription":"This app needs access to Bluetooth","NSRequiresAquaSystemAppearance":false,"CFBundleDisplayName":"Electron","ElectronAsarIntegrity":{"Resources/default_app.asar":{"algorithm":"SHA256","hash":"47faa213e09c3fc3e66e46a45397ca910262eca97971cafa1eb53fcb2305264d"}},"NSCameraUsageDescription":"This app needs access to the camera","NSMainNibFile":"MainMenu","NSPrincipalClass":"AtomApplication","NSSupportsAutomaticGraphicsSwitching":true,"CFBundleVersion":"31.7.7"},{"NSSupportsAutomaticGraphicsSwitching":true,"LSUIElement":true,"CFBundleName":"Electron Helper","CFBundlePackageType":"APPL","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTSDKBuild":"23F73","DTSDKName":"macosx14.5","DTXcode":"1540","DTXcodeBuild":"15F31d","CFBundleIdentifier":"com.github.Electron.helper","LSEnvironment":{"MallocNanoZone":"0"}},null,null,{"NSSupportsAutomaticGraphicsSwitching":true,"CFBundleIdentifier":"com.github.Electron.helper","CFBundleName":"Electron Helper (Renderer)","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTSDKBuild":"23F73","DTSDKName":"macosx14.5","DTXcode":"1540","CFBundlePackageType":"APPL","DTXcodeBuild":"15F31d","LSEnvironment":{"MallocNanoZone":"0"},"LSUIElement":true},{"CFBundleName":"Electron Helper (Plugin)","CFBundlePackageType":"APPL","DTXcodeBuild":"15F31d","NSSupportsAutomaticGraphicsSwitching":true,"CFBundleIdentifier":"com.github.Electron.helper","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTSDKBuild":"23F73","DTSDKName":"macosx14.5","DTXcode":"1540","LSEnvironment":{"MallocNanoZone":"0"},"LSUIElement":true},{"CFBundleIdentifier":"com.github.Electron.helper","CFBundlePackageType":"APPL","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTSDKBuild":"23F73","DTXcode":"1540","LSUIElement":true,"CFBundleName":"Electron Helper (GPU)","DTSDKName":"macosx14.5","DTXcodeBuild":"15F31d","LSEnvironment":{"MallocNanoZone":"0"},"NSSupportsAutomaticGraphicsSwitching":true},null]
+2025-12-04T14:55:00.5788790Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 icon --format icns --root /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build --root /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron --out /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/.icon-icns --input icon.icns
+2025-12-04T14:55:00.5892050Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build/icon.icns
+2025-12-04T14:55:00.5996560Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/icon.icns
+2025-12-04T14:55:00.5998810Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build/icon.icns
+2025-12-04T14:55:00.6113820Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/icon.icns
+2025-12-04T14:55:00.6243630Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build/icons
+2025-12-04T14:55:00.6421140Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/icons
+2025-12-04T14:55:00.6541750Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build/icon.png
+2025-12-04T14:55:00.6644060Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/icon.png
+2025-12-04T14:55:00.6748140Z   • no icons found, using provided fallback sources  
+2025-12-04T14:55:00.6849760Z   • exited          command=app-builder_arm64 code=0 pid=2078 out={"icons":null,"isFallback":true}
+2025-12-04T14:55:00.6951590Z   • default Electron icon is used  reason=application icon is not set
+2025-12-04T14:55:00.7014440Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 encode-plist
+2025-12-04T14:55:00.7121480Z   • map async       taskCount=5
+2025-12-04T14:55:00.7224290Z   • exited          command=app-builder_arm64 code=0 pid=2079
+2025-12-04T14:55:00.7329230Z   • getPublishConfigsForUpdateInfo: no publishConfigs, detect using repository info
+2025-12-04T14:55:00.7431850Z [afterPack] platform: darwin arch: 1
+2025-12-04T14:55:00.7534000Z [afterPack] appOutDir: /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp
+2025-12-04T14:55:00.7635610Z [afterPack] appOutDir entries: [ 'Forschungsdaten-Analyseplattform.app' ]
+2025-12-04T14:55:00.7661570Z [afterPack] .app path: /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Forschungsdaten-Analyseplattform.app
+2025-12-04T14:55:00.7674200Z [afterPack] Resources/app exists: true
+2025-12-04T14:55:00.7674590Z [afterPack] Resources/app/main.js exists: false
+2025-12-04T14:55:00.7675160Z [afterPack] Resources/app/dist/index.html exists: true
+2025-12-04T14:55:00.7675700Z [afterPack] Resources/app entries: [ 'build-hooks', 'dist', 'package.json' ]
+2025-12-04T14:55:00.7678130Z   ⨯ Application entry file "/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Forschungsdaten-Analyseplattform.app/Contents/Resources/app/main.js" does not exist. Seems like a wrong configuration.  failedTask=build stackTrace=Error: Application entry file "/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-universal-x64-temp/Forschungsdaten-Analyseplattform.app/Contents/Resources/app/main.js" does not exist. Seems like a wrong configuration.
+2025-12-04T14:55:00.7681430Z     at MacPackager.checkFileInPackage (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/platformPackager.ts:539:15)
+2025-12-04T14:55:00.7682510Z     at MacPackager.sanityCheckPackage (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/platformPackager.ts:562:5)
+2025-12-04T14:55:00.7683580Z     at MacPackager.doPack (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/platformPackager.ts:319:5)
+2025-12-04T14:55:00.7684550Z     at MacPackager.doPack (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/macPackager.ts:124:9)
+2025-12-04T14:55:00.7685440Z     at MacPackager.pack (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/macPackager.ts:198:9)
+2025-12-04T14:55:00.7686460Z     at Packager.doBuild (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/packager.ts:445:9)
+2025-12-04T14:55:00.7687330Z     at executeFinally (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/builder-util/src/promise.ts:12:14)
+2025-12-04T14:55:00.7688240Z     at Packager._build (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/packager.ts:379:31)
+2025-12-04T14:55:00.7689490Z     at Packager.build (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/packager.ts:340:12)
+2025-12-04T14:55:00.7690350Z     at executeFinally (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/builder-util/src/promise.ts:12:14)
+2025-12-04T14:55:00.7720580Z ##[error]Process completed with exit code 1.

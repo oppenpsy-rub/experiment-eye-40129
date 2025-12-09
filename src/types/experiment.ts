@@ -16,6 +16,8 @@ export interface ParticipantData {
   ownAccent: string;
   responses: Record<string, any>;
   stimulusRatings: StimulusRating[];
+  accentPreferences?: AccentPreferenceChoice[];
+  regionalResponses?: RegionalResponse[];
 }
 
 export interface StimulusRating {
@@ -56,4 +58,58 @@ export interface ParticipantProfile {
     mostAppreciatedAccent: string;
     leastAppreciatedAccent: string;
   };
+}
+
+export interface AccentPreferenceChoice {
+  questionLabel: string;
+  questionKey: string;
+  accentCategory: AccentCategory;
+  participantCode: string;
+}
+
+export type AccentCategory =
+  | 'parisien'
+  | 'québécois'
+  | 'du sud de la france'
+  | 'alsacien'
+  | 'breton'
+  | 'africain'
+  | 'canadien'
+  | 'nord'
+  | 'banlieue'
+  | 'picard'
+  | 'normand'
+  | 'aucun'
+  | 'autre';
+
+export type RegionKey = 'sud' | 'canada' | 'nord' | 'paris';
+
+export interface QuebecPlaces {
+  selected: string[];
+  partout?: boolean;
+  jeNeSaisPas?: boolean;
+}
+
+export interface RegionalResponse {
+  participant_code: string;
+  region_key: RegionKey;
+  name_raw?: string;
+  name_canonical?: string;
+  also_terms?: string[];
+  personalities?: string[];
+  tokens_words?: string[];
+  tokens_pronunciation?: string[];
+  tokens_grammar?: string[];
+  accents_listed?: string[];
+  diff_so_se?: boolean;
+  diff_marseille_toulouse?: boolean;
+  liking?: number;
+  // Kanada-spezifisch
+  quebecPlaces?: QuebecPlaces;
+  acadienKnown?: boolean;
+  acadienPlaces?: string[];
+  acadienTokens?: string[];
+  // Paris-spezifisch
+  parisiansHaveAccent?: boolean;
+  parisStandard?: boolean;
 }

@@ -20,7 +20,7 @@ export const ParticipantProfile = ({ participant }: ParticipantProfileProps) => 
   ];
 
   const stimulusChartData = participant.stimulusRatings
-    .filter(r => r.sympathyRating > 0)
+    .filter(r => typeof r.sympathyRating === 'number' && !isNaN(r.sympathyRating))
     .map(rating => ({
       stimulus: `Stimulus ${rating.stimulusNumber}`,
       Sympathie: rating.sympathyRating,
@@ -165,9 +165,9 @@ export const ParticipantProfile = ({ participant }: ParticipantProfileProps) => 
                   <RadarChart data={radarData}>
                     <PolarGrid stroke="hsl(var(--border))" />
                     <PolarAngleAxis dataKey="subject" tick={{ fill: 'hsl(var(--foreground))' }} />
-                    <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                    <PolarRadiusAxis angle={90} domain={[1, 5]} tick={{ fill: 'hsl(var(--muted-foreground))' }} />
                     <Radar 
-                      name="Bewertungen" 
+                      name="Bewertungen (Likert 1–5)" 
                       dataKey="value" 
                       stroke="hsl(var(--primary))" 
                       fill="hsl(var(--primary))" 
@@ -185,7 +185,7 @@ export const ParticipantProfile = ({ participant }: ParticipantProfileProps) => 
                   <BarChart data={stimulusChartData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                     <XAxis dataKey="stimulus" tick={{ fill: 'hsl(var(--foreground))' }} />
-                    <YAxis domain={[0, 10]} tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                    <YAxis domain={[1, 5]} tick={{ fill: 'hsl(var(--muted-foreground))' }} />
                     <Tooltip 
                       contentStyle={{ 
                         backgroundColor: 'hsl(var(--background))', 

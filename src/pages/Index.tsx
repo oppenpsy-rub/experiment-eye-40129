@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FlaskConical, Download, Users, Map, BarChart3 } from "lucide-react";
+import { FlaskConical, Download, Users, Map, BarChart3, Upload } from "lucide-react";
 import { toast } from "sonner";
 import * as XLSX from 'xlsx';
 import { ParticipantData, MentalMapData } from "@/types/experiment";
@@ -9,52 +9,64 @@ import { parseExperimentData, parseMentalMapData, getParticipantMentalMaps } fro
 import { ParticipantSelector } from "@/components/ParticipantSelector";
 import { ParticipantProfile } from "@/components/ParticipantProfile";
 import { MentalMapViewer } from "@/components/MentalMapViewer";
-import { MentalMapAnalysis } from "@/components/MentalMapAnalysis";
 import { MentalMapHeatmap } from "@/components/MentalMapHeatmap";
-import { AdvancedAnalysis } from "@/components/AdvancedAnalysis";
 import { DataTable } from "@/components/DataTable";
 import { Statistics } from "@/components/Statistics";
+import { AccentPreferencesView } from "@/components/AccentPreferencesView";
+import { AccentRegionsAnalysis } from "@/components/AccentRegionsAnalysis";
+import { useQuery } from "@tanstack/react-query";
+import { EXCEL_PATH, MENTAL_MAPS_PATH } from "@/config";
+import { DataUpload } from "@/components/DataUpload";
+import { GeoJsonUpload } from "@/components/GeoJsonUpload";
 
 const Index = () => {
-  const [participants, setParticipants] = useState<ParticipantData[]>([]);
-  const [mentalMapData, setMentalMapData] = useState<MentalMapData | null>(null);
+  const [participantsOverride, setParticipantsOverride] = useState<ParticipantData[] | null>(null);
+  const [mentalMapsOverride, setMentalMapsOverride] = useState<MentalMapData | null>(null);
   const [selectedParticipantId, setSelectedParticipantId] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    loadExperimentData();
-  }, []);
-
-  const loadExperimentData = async () => {
-    try {
-      setLoading(true);
-      
-      // Load Excel data
-      const response = await fetch('/data/Gesamtdaten_harmonisiert.xlsx');
+  const [activeTab, setActiveTab] = useState<string>("upload");
+  const excelQuery = useQuery({
+    queryKey: ["excelData"],
+    queryFn: async () => {
+      const response = await fetch(EXCEL_PATH);
+      if (!response.ok) throw new Error(`Excel konnte nicht geladen werden (${response.status})`);
       const arrayBuffer = await response.arrayBuffer();
       const workbook = XLSX.read(arrayBuffer, { type: 'array' });
       const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json(firstSheet);
-      
-      const parsedParticipants = parseExperimentData(jsonData);
-      setParticipants(parsedParticipants);
-      
-      // Load Mental Maps
-      const mentalMaps = await parseMentalMapData('/data/Export_Mental_Maps.geojson');
-      setMentalMapData(mentalMaps);
-      
-      toast.success(`${parsedParticipants.length} Probanden und ${mentalMaps.features.length} Mental Maps geladen`);
-    } catch (error) {
-      console.error('Error loading data:', error);
-      toast.error('Fehler beim Laden der Experimentdaten');
-    } finally {
-      setLoading(false);
+      return XLSX.utils.sheet_to_json(firstSheet);
+    },
+    staleTime: 5 * 60 * 1000,
+    enabled: activeTab !== 'upload',
+  });
+
+  const participantsFromExcel = useMemo<ParticipantData[]>(() => {
+    if (!excelQuery.data) return [];
+    return parseExperimentData(excelQuery.data as any[]);
+  }, [excelQuery.data]);
+
+  const mentalMapsQuery = useQuery({
+    queryKey: ["mentalMaps"],
+    queryFn: async () => parseMentalMapData(MENTAL_MAPS_PATH),
+    staleTime: 5 * 60 * 1000,
+    enabled: activeTab !== 'upload',
+  });
+
+  useEffect(() => {
+    if (excelQuery.isSuccess && mentalMapsQuery.isSuccess) {
+      const participantCount = participantsFromExcel.length;
+      const mapCount = (mentalMapsQuery.data as MentalMapData).features.length;
+      toast.success(`${participantCount} Probanden und ${mapCount} Mental Maps geladen`);
     }
-  };
+    if (excelQuery.isError || mentalMapsQuery.isError) {
+      toast.error('Fehler beim Laden der Experimentdaten');
+    }
+  }, [excelQuery.isSuccess, excelQuery.isError, mentalMapsQuery.isSuccess, mentalMapsQuery.isError, participantsFromExcel, mentalMapsQuery.data]);
+
+  const participants = participantsOverride ?? participantsFromExcel;
+  const mentalMapData = (mentalMapsOverride ?? mentalMapsQuery.data) ?? null;
 
   const selectedParticipant = participants.find(p => p.id === selectedParticipantId);
-  const selectedMentalMaps = selectedParticipantId && mentalMapData 
-    ? getParticipantMentalMaps(selectedParticipant?.participantCode || '', mentalMapData)
+  const selectedMentalMaps = selectedParticipantId && mentalMapData
+    ? getParticipantMentalMaps(selectedParticipant?.participantCode || '', mentalMapData as MentalMapData)
     : [];
 
   const handleExport = () => {
@@ -73,7 +85,7 @@ const Index = () => {
     toast.success("Daten erfolgreich exportiert");
   };
 
-  if (loading) {
+  if (activeTab !== 'upload' && (excelQuery.isLoading || mentalMapsQuery.isLoading)) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -100,18 +112,24 @@ const Index = () => {
                 </p>
               </div>
             </div>
-            {participants.length > 0 && (
-              <Button onClick={handleExport} variant="outline">
-                <Download className="mr-2 h-4 w-4" />
-                Export
+            <div className="flex items-center gap-2">
+              <Button onClick={() => setActiveTab('upload')} variant="outline">
+                <Upload className="mr-2 h-4 w-4" />
+                Upload
               </Button>
-            )}
+              {participants.length > 0 && (
+                <Button onClick={handleExport} variant="outline">
+                  <Download className="mr-2 h-4 w-4" />
+                  Export
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="overview" className="space-y-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
@@ -129,18 +147,18 @@ const Index = () => {
               <Map className="h-4 w-4" />
               Heatmap
             </TabsTrigger>
-            <TabsTrigger value="map-analysis" className="flex items-center gap-2">
-              <Map className="h-4 w-4" />
-              Map Analyse
-            </TabsTrigger>
-            <TabsTrigger value="analysis" className="flex items-center gap-2">
+            <TabsTrigger value="accent-analysis" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
-              Erweiterte Analyse
+              Akzentanalyse
+            </TabsTrigger>
+            <TabsTrigger value="regions-analysis" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Akzent- & Regionen
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
-            <Statistics data={participants.map(p => p.responses)} />
+            <Statistics participants={participants} />
             <DataTable data={participants.map(p => ({
               ID: p.id,
               Code: p.participantCode,
@@ -182,22 +200,45 @@ const Index = () => {
 
           <TabsContent value="heatmap">
             {mentalMapData && (
-              <MentalMapHeatmap mentalMapData={mentalMapData} />
-            )}
-          </TabsContent>
-
-          <TabsContent value="map-analysis">
-            {mentalMapData && (
-              <MentalMapAnalysis 
-                mentalMapData={mentalMapData}
-                participants={participants}
+              <MentalMapHeatmap 
+                mentalMapData={mentalMapData as MentalMapData}
+                participantCodes={participants.map(p => (p.participantCode || '').trim()).filter(c => c.length > 0)}
               />
             )}
           </TabsContent>
 
-          <TabsContent value="analysis">
-            <AdvancedAnalysis participants={participants} />
+          <TabsContent value="accent-analysis" className="space-y-6">
+            <AccentPreferencesView participants={participants} />
           </TabsContent>
+
+          <TabsContent value="regions-analysis" className="space-y-6">
+            <AccentRegionsAnalysis participants={participants} />
+          </TabsContent>
+
+          <TabsContent value="upload" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              <DataUpload
+                onDataLoaded={(rawRows: any[]) => {
+                  try {
+                    const parsed = parseExperimentData(rawRows);
+                    setParticipantsOverride(parsed);
+                    toast.success(`${parsed.length} Probanden aus Upload geladen – Override aktiv`);
+                  } catch (e) {
+                    console.error(e);
+                    toast.error("Fehler beim Verarbeiten der Upload-Daten");
+                  }
+                }}
+              />
+              <GeoJsonUpload
+                onMentalMapsLoaded={(data: MentalMapData) => {
+                  setMentalMapsOverride(data);
+                  const mapCount = data.features.length;
+                  toast.success(`${mapCount} Mental Maps aus GeoJSON geladen – Override aktiv`);
+                }}
+              />
+            </div>
+          </TabsContent>
+
         </Tabs>
       </main>
     </div>

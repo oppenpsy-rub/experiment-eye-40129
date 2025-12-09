@@ -14,7 +14,7 @@ export const DataTable = ({ data }: DataTableProps) => {
     <Card>
       <CardHeader>
         <CardTitle>Datenvorschau</CardTitle>
-        <CardDescription>Erste {Math.min(10, data.length)} Einträge</CardDescription>
+        <CardDescription>Alle Einträge ({data.length})</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="rounded-md border overflow-auto max-h-96">
@@ -29,7 +29,7 @@ export const DataTable = ({ data }: DataTableProps) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.slice(0, 10).map((row, index) => (
+              {data.map((row, index) => (
                 <TableRow key={index}>
                   {keys.map((key) => (
                     <TableCell key={key}>

@@ -1,0 +1,430 @@
+﻿2025-12-04T15:30:34.7481290Z Current runner version: '2.329.0'
+2025-12-04T15:30:34.7495900Z ##[group]Runner Image Provisioner
+2025-12-04T15:30:34.7496370Z Hosted Compute Agent
+2025-12-04T15:30:34.7497550Z Version: 20251124.448
+2025-12-04T15:30:34.7497950Z Commit: fda5086b43ec66ade217e5fcd18146c879571177
+2025-12-04T15:30:34.7498380Z Build Date: 2025-11-24T21:16:26Z
+2025-12-04T15:30:34.7498780Z ##[endgroup]
+2025-12-04T15:30:34.7499100Z ##[group]Operating System
+2025-12-04T15:30:34.7517650Z macOS
+2025-12-04T15:30:34.7518040Z 15.7.2
+2025-12-04T15:30:34.7518940Z 24G325
+2025-12-04T15:30:34.7519220Z ##[endgroup]
+2025-12-04T15:30:34.7519520Z ##[group]Runner Image
+2025-12-04T15:30:34.7519840Z Image: macos-15-arm64
+2025-12-04T15:30:34.7520150Z Version: 20251126.0044
+2025-12-04T15:30:34.7520810Z Included Software: https://github.com/actions/runner-images/blob/macos-15-arm64/20251126.0044/images/macos/macos-15-arm64-Readme.md
+2025-12-04T15:30:34.7521890Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-15-arm64%2F20251126.0044
+2025-12-04T15:30:34.7522480Z ##[endgroup]
+2025-12-04T15:30:34.7523190Z ##[group]GITHUB_TOKEN Permissions
+2025-12-04T15:30:34.7524900Z Contents: read
+2025-12-04T15:30:34.7525190Z Metadata: read
+2025-12-04T15:30:34.7525510Z Packages: read
+2025-12-04T15:30:34.7525820Z ##[endgroup]
+2025-12-04T15:30:34.7527750Z Secret source: Actions
+2025-12-04T15:30:34.7528390Z Prepare workflow directory
+2025-12-04T15:30:34.7998830Z Prepare all required actions
+2025-12-04T15:30:34.8027300Z Getting action download info
+2025-12-04T15:30:35.2121920Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-04T15:30:36.5063030Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2025-12-04T15:30:36.6799690Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2025-12-04T15:30:36.9551250Z Complete job name: build
+2025-12-04T15:30:36.9992080Z ##[group]Run actions/checkout@v4
+2025-12-04T15:30:36.9992720Z with:
+2025-12-04T15:30:36.9993080Z   repository: oppenpsy-rub/experiment-eye-40129
+2025-12-04T15:30:36.9993670Z   token: ***
+2025-12-04T15:30:36.9993940Z   ssh-strict: true
+2025-12-04T15:30:36.9994230Z   ssh-user: git
+2025-12-04T15:30:36.9994530Z   persist-credentials: true
+2025-12-04T15:30:36.9994840Z   clean: true
+2025-12-04T15:30:36.9995120Z   sparse-checkout-cone-mode: true
+2025-12-04T15:30:36.9995460Z   fetch-depth: 1
+2025-12-04T15:30:36.9995740Z   fetch-tags: false
+2025-12-04T15:30:36.9996020Z   show-progress: true
+2025-12-04T15:30:36.9996310Z   lfs: false
+2025-12-04T15:30:36.9996570Z   submodules: false
+2025-12-04T15:30:36.9996860Z   set-safe-directory: true
+2025-12-04T15:30:36.9998570Z ##[endgroup]
+2025-12-04T15:30:37.3643350Z Syncing repository: oppenpsy-rub/experiment-eye-40129
+2025-12-04T15:30:37.3644880Z ##[group]Getting Git version info
+2025-12-04T15:30:37.3645790Z Working directory is '/Users/runner/work/experiment-eye-40129/experiment-eye-40129'
+2025-12-04T15:30:37.3647080Z [command]/opt/homebrew/bin/git version
+2025-12-04T15:30:37.4513330Z git version 2.50.1
+2025-12-04T15:30:37.4725760Z ##[endgroup]
+2025-12-04T15:30:37.5031690Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/5afc7084-538c-414f-aaf8-159d8ad9fd8d/.gitconfig'
+2025-12-04T15:30:37.5154210Z Temporarily overriding HOME='/Users/runner/work/_temp/5afc7084-538c-414f-aaf8-159d8ad9fd8d' before making global git config changes
+2025-12-04T15:30:37.5261150Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-04T15:30:37.5409780Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/experiment-eye-40129/experiment-eye-40129
+2025-12-04T15:30:37.6119510Z Deleting the contents of '/Users/runner/work/experiment-eye-40129/experiment-eye-40129'
+2025-12-04T15:30:37.6224570Z ##[group]Initializing the repository
+2025-12-04T15:30:37.6329340Z [command]/opt/homebrew/bin/git init /Users/runner/work/experiment-eye-40129/experiment-eye-40129
+2025-12-04T15:30:37.6431270Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-12-04T15:30:37.6552430Z hint: is subject to change. To configure the initial branch name to use in all
+2025-12-04T15:30:37.6654740Z hint: of your new repositories, which will suppress this warning, call:
+2025-12-04T15:30:37.6770620Z hint:
+2025-12-04T15:30:37.6771830Z hint: 	git config --global init.defaultBranch <name>
+2025-12-04T15:30:37.6774350Z hint:
+2025-12-04T15:30:37.6782660Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-12-04T15:30:37.6783690Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-12-04T15:30:37.6848370Z hint:
+2025-12-04T15:30:37.6952760Z hint: 	git branch -m <name>
+2025-12-04T15:30:37.6959210Z hint:
+2025-12-04T15:30:37.6960680Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-12-04T15:30:37.6962300Z Initialized empty Git repository in /Users/runner/work/experiment-eye-40129/experiment-eye-40129/.git/
+2025-12-04T15:30:37.6966640Z [command]/opt/homebrew/bin/git remote add origin https://github.com/oppenpsy-rub/experiment-eye-40129
+2025-12-04T15:30:37.7043600Z ##[endgroup]
+2025-12-04T15:30:37.7050720Z ##[group]Disabling automatic garbage collection
+2025-12-04T15:30:37.7057040Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+2025-12-04T15:30:37.7088450Z ##[endgroup]
+2025-12-04T15:30:37.7095060Z ##[group]Setting up auth
+2025-12-04T15:30:37.7198650Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-12-04T15:30:37.7214540Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-12-04T15:30:37.7911320Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-04T15:30:37.7968720Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-12-04T15:30:37.8777740Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-04T15:30:37.8829440Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2025-12-04T15:30:37.9737430Z [command]/opt/homebrew/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-12-04T15:30:37.9795790Z ##[endgroup]
+2025-12-04T15:30:37.9796700Z ##[group]Fetching the repository
+2025-12-04T15:30:37.9801090Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a02b2b8c3226eaff85dd0f8a26ff9a18102912e7:refs/remotes/origin/main
+2025-12-04T15:30:38.8586160Z From https://github.com/oppenpsy-rub/experiment-eye-40129
+2025-12-04T15:30:38.8586990Z  * [new ref]         a02b2b8c3226eaff85dd0f8a26ff9a18102912e7 -> origin/main
+2025-12-04T15:30:38.8672190Z ##[endgroup]
+2025-12-04T15:30:38.8672770Z ##[group]Determining the checkout info
+2025-12-04T15:30:38.8673360Z ##[endgroup]
+2025-12-04T15:30:38.8676930Z [command]/opt/homebrew/bin/git sparse-checkout disable
+2025-12-04T15:30:38.8749210Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+2025-12-04T15:30:38.8808630Z ##[group]Checking out the ref
+2025-12-04T15:30:38.8811420Z [command]/opt/homebrew/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-12-04T15:30:38.9043560Z Switched to a new branch 'main'
+2025-12-04T15:30:38.9055280Z branch 'main' set up to track 'origin/main'.
+2025-12-04T15:30:38.9067590Z ##[endgroup]
+2025-12-04T15:30:38.9139210Z [command]/opt/homebrew/bin/git log -1 --format=%H
+2025-12-04T15:30:38.9195670Z a02b2b8c3226eaff85dd0f8a26ff9a18102912e7
+2025-12-04T15:30:38.9358000Z ##[group]Run actions/setup-node@v4
+2025-12-04T15:30:38.9358260Z with:
+2025-12-04T15:30:38.9358620Z   node-version: 20
+2025-12-04T15:30:38.9358800Z   cache: npm
+2025-12-04T15:30:38.9359060Z   cache-dependency-path: package-lock.json
+electron/package-lock.json
+
+2025-12-04T15:30:38.9359410Z   always-auth: false
+2025-12-04T15:30:38.9359570Z   check-latest: false
+2025-12-04T15:30:38.9359870Z   token: ***
+2025-12-04T15:30:38.9360000Z ##[endgroup]
+2025-12-04T15:30:39.1240620Z Found in cache @ /Users/runner/hostedtoolcache/node/20.19.6/arm64
+2025-12-04T15:30:39.1244840Z ##[group]Environment details
+2025-12-04T15:30:39.9494950Z node: v20.19.6
+2025-12-04T15:30:39.9503760Z npm: 10.8.2
+2025-12-04T15:30:39.9504090Z yarn: 1.22.22
+2025-12-04T15:30:39.9504960Z ##[endgroup]
+2025-12-04T15:30:39.9511000Z [command]/Users/runner/hostedtoolcache/node/20.19.6/arm64/bin/npm config get cache
+2025-12-04T15:30:40.0807640Z /Users/runner/.npm
+2025-12-04T15:30:40.3806360Z npm cache is not found
+2025-12-04T15:30:40.4038710Z ##[group]Run npm install -g npm@latest
+2025-12-04T15:30:40.4039050Z [36;1mnpm install -g npm@latest[0m
+2025-12-04T15:30:40.4089290Z shell: /bin/bash -e {0}
+2025-12-04T15:30:40.4089530Z ##[endgroup]
+2025-12-04T15:30:43.5685550Z 
+2025-12-04T15:30:43.5702650Z removed 45 packages, and changed 107 packages in 3s
+2025-12-04T15:30:43.5733950Z 
+2025-12-04T15:30:43.5734590Z 16 packages are looking for funding
+2025-12-04T15:30:43.5735130Z   run `npm fund` for details
+2025-12-04T15:30:43.5817270Z ##[group]Run npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+2025-12-04T15:30:43.5817760Z [36;1mnpm ci --no-audit --no-fund || npm install --no-audit --no-fund[0m
+2025-12-04T15:30:43.5858920Z shell: /bin/bash -e {0}
+2025-12-04T15:30:43.5859120Z ##[endgroup]
+2025-12-04T15:30:46.1900160Z npm error code EUSAGE
+2025-12-04T15:30:46.1912470Z npm error
+2025-12-04T15:30:46.1913610Z npm error `npm ci` can only install packages when your package.json and package-lock.json or npm-shrinkwrap.json are in sync. Please update your lock file with `npm install` before continuing.
+2025-12-04T15:30:46.1917650Z npm error
+2025-12-04T15:30:46.1918230Z npm error Missing: @tauri-apps/cli@2.9.5 from lock file
+2025-12-04T15:30:46.1918900Z npm error Missing: html-to-image@1.11.13 from lock file
+2025-12-04T15:30:46.1919580Z npm error Missing: @tauri-apps/cli-darwin-arm64@2.9.5 from lock file
+2025-12-04T15:30:46.1920190Z npm error Missing: @tauri-apps/cli-darwin-x64@2.9.5 from lock file
+2025-12-04T15:30:46.1920890Z npm error Missing: @tauri-apps/cli-linux-arm-gnueabihf@2.9.5 from lock file
+2025-12-04T15:30:46.1921580Z npm error Missing: @tauri-apps/cli-linux-arm64-gnu@2.9.5 from lock file
+2025-12-04T15:30:46.1922210Z npm error Missing: @tauri-apps/cli-linux-arm64-musl@2.9.5 from lock file
+2025-12-04T15:30:46.1923000Z npm error Missing: @tauri-apps/cli-linux-riscv64-gnu@2.9.5 from lock file
+2025-12-04T15:30:46.1923670Z npm error Missing: @tauri-apps/cli-linux-x64-gnu@2.9.5 from lock file
+2025-12-04T15:30:46.1924230Z npm error Missing: @tauri-apps/cli-linux-x64-musl@2.9.5 from lock file
+2025-12-04T15:30:46.1924960Z npm error Missing: @tauri-apps/cli-win32-arm64-msvc@2.9.5 from lock file
+2025-12-04T15:30:46.1925510Z npm error Missing: @tauri-apps/cli-win32-ia32-msvc@2.9.5 from lock file
+2025-12-04T15:30:46.1926120Z npm error Missing: @tauri-apps/cli-win32-x64-msvc@2.9.5 from lock file
+2025-12-04T15:30:46.1927340Z npm error
+2025-12-04T15:30:46.1928050Z npm error Clean install a project
+2025-12-04T15:30:46.1928640Z npm error
+2025-12-04T15:30:46.1928960Z npm error Usage:
+2025-12-04T15:30:46.1929140Z npm error npm ci
+2025-12-04T15:30:46.1929410Z npm error
+2025-12-04T15:30:46.1929690Z npm error Options:
+2025-12-04T15:30:46.1930250Z npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+2025-12-04T15:30:46.1930980Z npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+2025-12-04T15:30:46.1931650Z npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+2025-12-04T15:30:46.1932270Z npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts] [--no-audit]
+2025-12-04T15:30:46.1939050Z npm error [--no-bin-links] [--no-fund] [--dry-run]
+2025-12-04T15:30:46.1939630Z npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+2025-12-04T15:30:46.1940240Z npm error [--workspaces] [--include-workspace-root] [--install-links]
+2025-12-04T15:30:46.1940610Z npm error
+2025-12-04T15:30:46.1941050Z npm error aliases: clean-install, ic, install-clean, isntall-clean
+2025-12-04T15:30:46.1941560Z npm error
+2025-12-04T15:30:46.1941990Z npm error Run "npm help ci" for more info
+2025-12-04T15:30:46.1942580Z npm error A complete log of this run can be found in: /Users/runner/.npm/_logs/2025-12-04T15_30_43_735Z-debug-0.log
+2025-12-04T15:30:52.9563950Z 
+2025-12-04T15:30:52.9669410Z added 395 packages in 7s
+2025-12-04T15:30:53.0062620Z ##[group]Run npm run build
+2025-12-04T15:30:53.0063620Z [36;1mnpm run build[0m
+2025-12-04T15:30:53.0103120Z shell: /bin/bash -e {0}
+2025-12-04T15:30:53.0103400Z ##[endgroup]
+2025-12-04T15:30:53.1927610Z 
+2025-12-04T15:30:53.2028670Z > vite_react_shadcn_ts@0.0.0 build
+2025-12-04T15:30:53.2129620Z > vite build
+2025-12-04T15:30:53.2236750Z 
+2025-12-04T15:30:53.4410270Z [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+2025-12-04T15:30:53.7010560Z transforming...
+2025-12-04T15:30:53.7351990Z Browserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+2025-12-04T15:30:53.7352620Z   npx update-browserslist-db@latest
+2025-12-04T15:30:53.7353460Z   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-12-04T15:30:58.2518460Z [32m✓[39m 2526 modules transformed.
+2025-12-04T15:30:58.6517150Z rendering chunks...
+2025-12-04T15:30:58.6643590Z computing gzip size...
+2025-12-04T15:30:58.6991180Z [2mdist/[22m[32mindex.html                 [39m[1m[2m    1.15 kB[22m[1m[22m[2m │ gzip:   0.51 kB[22m
+2025-12-04T15:30:58.6991750Z [33m
+2025-12-04T15:30:58.6992270Z (!) Some chunks are larger than 500 kB after minification. Consider:
+2025-12-04T15:30:58.6992760Z - Using dynamic import() to code-split the application
+2025-12-04T15:30:58.6993630Z - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2025-12-04T15:30:58.6994770Z - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+2025-12-04T15:30:58.6996090Z [2mdist/[22m[2massets/[22m[35mindex-BYfpH4YN.css  [39m[1m[2m   74.54 kB[22m[1m[22m[2m │ gzip:  16.95 kB[22m
+2025-12-04T15:30:58.6996990Z [2mdist/[22m[2massets/[22m[36mindex-HbPth9jI.js   [39m[1m[33m1,300.10 kB[39m[22m[2m │ gzip: 394.52 kB[22m
+2025-12-04T15:30:58.7000910Z [32m✓ built in 5.02s[39m
+2025-12-04T15:30:58.7920530Z ##[group]Run rm -rf electron/dist
+2025-12-04T15:30:58.7920800Z [36;1mrm -rf electron/dist[0m
+2025-12-04T15:30:58.7921060Z [36;1mcp -R dist electron/dist[0m
+2025-12-04T15:30:58.7921500Z [36;1m# Copy macOS icon into electron/ so electron-builder can resolve it without leaving root[0m
+2025-12-04T15:30:58.7922240Z [36;1mcp -f src-tauri/icons/icon.icns electron/icon.icns || true[0m
+2025-12-04T15:30:58.7962440Z shell: /bin/bash -e {0}
+2025-12-04T15:30:58.7962680Z ##[endgroup]
+2025-12-04T15:30:58.8504940Z cp: src-tauri/icons/icon.icns: No such file or directory
+2025-12-04T15:30:58.8558450Z ##[group]Run echo "Root files:" && ls -la
+2025-12-04T15:30:58.8558850Z [36;1mecho "Root files:" && ls -la[0m
+2025-12-04T15:30:58.8559140Z [36;1mecho "Electron files:" && ls -la electron[0m
+2025-12-04T15:30:58.8559470Z [36;1mecho "Electron dist files:" && ls -la electron/dist || true[0m
+2025-12-04T15:30:58.8589470Z shell: /bin/bash -e {0}
+2025-12-04T15:30:58.8589700Z ##[endgroup]
+2025-12-04T15:30:58.8921600Z Root files:
+2025-12-04T15:30:58.8987870Z total 992
+2025-12-04T15:30:58.9054660Z drwxr-xr-x   24 runner  staff     768 Dec  4 15:30 .
+2025-12-04T15:30:58.9068420Z drwxr-xr-x    3 runner  staff      96 Dec  4 15:30 ..
+2025-12-04T15:30:58.9113290Z drwxr-xr-x   14 runner  staff     448 Dec  4 15:30 .git
+2025-12-04T15:30:58.9117930Z drwxr-xr-x    3 runner  staff      96 Dec  4 15:30 .github
+2025-12-04T15:30:58.9126790Z -rw-r--r--    1 runner  staff     339 Dec  4 15:30 .gitignore
+2025-12-04T15:30:58.9127380Z -rw-r--r--    1 runner  staff  201126 Dec  4 15:30 bun.lockb
+2025-12-04T15:30:58.9127910Z -rw-r--r--    1 runner  staff     414 Dec  4 15:30 components.json
+2025-12-04T15:30:58.9128340Z drwxr-xr-x    8 runner  staff     256 Dec  4 15:30 dist
+2025-12-04T15:30:58.9128810Z drwxr-xr-x    5 runner  staff     160 Dec  4 15:30 electron
+2025-12-04T15:30:58.9129250Z -rw-r--r--    1 runner  staff     765 Dec  4 15:30 eslint.config.js
+2025-12-04T15:30:58.9129710Z -rw-r--r--    1 runner  staff    1050 Dec  4 15:30 index.html
+2025-12-04T15:30:58.9130250Z drwxr-xr-x  270 runner  staff    8640 Dec  4 15:30 node_modules
+2025-12-04T15:30:58.9130730Z -rw-r--r--    1 runner  staff  252955 Dec  4 15:30 package-lock.json
+2025-12-04T15:30:58.9131150Z -rw-r--r--    1 runner  staff    3296 Dec  4 15:30 package.json
+2025-12-04T15:30:58.9131620Z -rw-r--r--    1 runner  staff      81 Dec  4 15:30 postcss.config.js
+2025-12-04T15:30:58.9132070Z drwxr-xr-x    6 runner  staff     192 Dec  4 15:30 public
+2025-12-04T15:30:58.9132540Z -rw-r--r--    1 runner  staff    3875 Dec  4 15:30 README.md
+2025-12-04T15:30:58.9132960Z drwxr-xr-x   13 runner  staff     416 Dec  4 15:30 src
+2025-12-04T15:30:58.9133450Z drwxr-xr-x    3 runner  staff      96 Dec  4 15:30 src-tauri
+2025-12-04T15:30:58.9133960Z -rw-r--r--    1 runner  staff    2924 Dec  4 15:30 tailwind.config.ts
+2025-12-04T15:30:58.9134480Z -rw-r--r--    1 runner  staff     652 Dec  4 15:30 tsconfig.app.json
+2025-12-04T15:30:58.9135060Z -rw-r--r--    1 runner  staff     369 Dec  4 15:30 tsconfig.json
+2025-12-04T15:30:58.9135540Z -rw-r--r--    1 runner  staff     481 Dec  4 15:30 tsconfig.node.json
+2025-12-04T15:30:58.9136000Z -rw-r--r--    1 runner  staff     454 Dec  4 15:30 vite.config.ts
+2025-12-04T15:30:58.9136340Z Electron files:
+2025-12-04T15:30:58.9136520Z total 8
+2025-12-04T15:30:58.9136830Z drwxr-xr-x   5 runner  staff   160 Dec  4 15:30 .
+2025-12-04T15:30:58.9137180Z drwxr-xr-x  24 runner  staff   768 Dec  4 15:30 ..
+2025-12-04T15:30:58.9137660Z drwxr-xr-x   4 runner  staff   128 Dec  4 15:30 build-hooks
+2025-12-04T15:30:58.9138070Z drwxr-xr-x   8 runner  staff   256 Dec  4 15:30 dist
+2025-12-04T15:30:58.9138510Z -rw-r--r--   1 runner  staff  1633 Dec  4 15:30 package.json
+2025-12-04T15:30:58.9138870Z Electron dist files:
+2025-12-04T15:30:58.9139120Z total 40
+2025-12-04T15:30:58.9139440Z drwxr-xr-x  8 runner  staff   256 Dec  4 15:30 .
+2025-12-04T15:30:58.9139890Z drwxr-xr-x  5 runner  staff   160 Dec  4 15:30 ..
+2025-12-04T15:30:58.9140290Z drwxr-xr-x  4 runner  staff   128 Dec  4 15:30 assets
+2025-12-04T15:30:58.9140670Z drwxr-xr-x  4 runner  staff   128 Dec  4 15:30 data
+2025-12-04T15:30:58.9141140Z -rw-r--r--  1 runner  staff  7645 Dec  4 15:30 favicon.ico
+2025-12-04T15:30:58.9141550Z -rw-r--r--  1 runner  staff  1148 Dec  4 15:30 index.html
+2025-12-04T15:30:58.9141950Z -rw-r--r--  1 runner  staff  3253 Dec  4 15:30 placeholder.svg
+2025-12-04T15:30:58.9142420Z -rw-r--r--  1 runner  staff   160 Dec  4 15:30 robots.txt
+2025-12-04T15:30:58.9165790Z ##[group]Run npm --prefix electron ci --no-audit --no-fund || npm --prefix electron install --no-audit --no-fund
+2025-12-04T15:30:58.9166340Z [36;1mnpm --prefix electron ci --no-audit --no-fund || npm --prefix electron install --no-audit --no-fund[0m
+2025-12-04T15:30:58.9195380Z shell: /bin/bash -e {0}
+2025-12-04T15:30:58.9195560Z ##[endgroup]
+2025-12-04T15:30:59.2622830Z npm error code EUSAGE
+2025-12-04T15:30:59.2723790Z npm error
+2025-12-04T15:30:59.2763840Z npm error The `npm ci` command can only install with an existing package-lock.json or
+2025-12-04T15:30:59.2784200Z npm error npm-shrinkwrap.json with lockfileVersion >= 1. Run an install with npm@5 or
+2025-12-04T15:30:59.2805520Z npm error later to generate a package-lock.json file, then try again.
+2025-12-04T15:30:59.2805930Z npm error
+2025-12-04T15:30:59.2806230Z npm error Clean install a project
+2025-12-04T15:30:59.2807130Z npm error
+2025-12-04T15:30:59.2807350Z npm error Usage:
+2025-12-04T15:30:59.2807630Z npm error npm ci
+2025-12-04T15:30:59.2807930Z npm error
+2025-12-04T15:30:59.2808240Z npm error Options:
+2025-12-04T15:30:59.2808710Z npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+2025-12-04T15:30:59.2809350Z npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+2025-12-04T15:30:59.2810140Z npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+2025-12-04T15:30:59.2810830Z npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts] [--no-audit]
+2025-12-04T15:30:59.2811350Z npm error [--no-bin-links] [--no-fund] [--dry-run]
+2025-12-04T15:30:59.2811920Z npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+2025-12-04T15:30:59.2812490Z npm error [--workspaces] [--include-workspace-root] [--install-links]
+2025-12-04T15:30:59.2812860Z npm error
+2025-12-04T15:30:59.2813410Z npm error aliases: clean-install, ic, install-clean, isntall-clean
+2025-12-04T15:30:59.2813780Z npm error
+2025-12-04T15:30:59.2814070Z npm error Run "npm help ci" for more info
+2025-12-04T15:30:59.2814710Z npm error A complete log of this run can be found in: /Users/runner/.npm/_logs/2025-12-04T15_30_59_030Z-debug-0.log
+2025-12-04T15:31:07.8922460Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-12-04T15:31:08.3378360Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2025-12-04T15:31:08.4148470Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-12-04T15:31:08.4894220Z npm warn deprecated asar@3.2.0: Please use @electron/asar moving forward.  There is no API change, just a package name change
+2025-12-04T15:31:12.8493900Z 
+2025-12-04T15:31:12.8509740Z added 327 packages in 14s
+2025-12-04T15:31:12.8859150Z ##[group]Run npx electron-builder --projectDir=. --mac dmg zip --publish=never
+2025-12-04T15:31:12.8861200Z [36;1mnpx electron-builder --projectDir=. --mac dmg zip --publish=never[0m
+2025-12-04T15:31:12.8972190Z shell: /bin/bash -e {0}
+2025-12-04T15:31:12.8972480Z env:
+2025-12-04T15:31:12.8972660Z   DEBUG: electron-builder
+2025-12-04T15:31:12.8972900Z ##[endgroup]
+2025-12-04T15:31:14.5712630Z   • electron-builder  version=24.13.3 os=24.6.0
+2025-12-04T15:31:14.5735530Z   • loaded configuration  file=package.json ("build" field)
+2025-12-04T15:31:14.5754720Z   • effective config  config=directories:
+2025-12-04T15:31:14.5755260Z   output: ../electron-dist
+2025-12-04T15:31:14.5755790Z   buildResources: build
+2025-12-04T15:31:14.5756260Z   app: .
+2025-12-04T15:31:14.5756830Z appId: de.floem.perzeptionsexperimente
+2025-12-04T15:31:14.5757250Z productName: Forschungsdaten-Analyseplattform
+2025-12-04T15:31:14.5757680Z beforePack: ./build-hooks/beforePack.js
+2025-12-04T15:31:14.5758540Z afterPack: ./build-hooks/afterPack.js
+2025-12-04T15:31:14.5758920Z asar: true
+2025-12-04T15:31:14.5759200Z files:
+2025-12-04T15:31:14.5759540Z   - filter:
+2025-12-04T15:31:14.5759800Z       - '**/*'
+2025-12-04T15:31:14.5760060Z win:
+2025-12-04T15:31:14.5760390Z   target:
+2025-12-04T15:31:14.5760640Z     - target: nsis
+2025-12-04T15:31:14.5761210Z       arch:
+2025-12-04T15:31:14.5761700Z         - x64
+2025-12-04T15:31:14.5762030Z   icon: ../src-tauri/icons/icon.ico
+2025-12-04T15:31:14.5762290Z nsis:
+2025-12-04T15:31:14.5762530Z   oneClick: false
+2025-12-04T15:31:14.5762750Z   perMachine: true
+2025-12-04T15:31:14.5763000Z   allowToChangeInstallationDirectory: true
+2025-12-04T15:31:14.5763290Z   unicode: true
+2025-12-04T15:31:14.5763540Z   shortcutName: Forschungsdaten-Analyseplattform
+2025-12-04T15:31:14.5764050Z   runAfterFinish: true
+2025-12-04T15:31:14.5764390Z mac:
+2025-12-04T15:31:14.5765630Z   category: public.app-category.education
+2025-12-04T15:31:14.5774180Z   artifactName: Forschungsdaten-Analyseplattform-${version}-${arch}.${ext}
+2025-12-04T15:31:14.5775880Z   target:
+2025-12-04T15:31:14.5776100Z     - dmg
+2025-12-04T15:31:14.5777580Z     - zip
+2025-12-04T15:31:14.5779300Z   icon: icon.icns
+2025-12-04T15:31:14.5779580Z   hardenedRuntime: false
+2025-12-04T15:31:14.5780880Z   gatekeeperAssess: false
+2025-12-04T15:31:14.5782460Z 
+2025-12-04T15:31:14.5782870Z   • Specified application directory equals to project dir — superfluous or wrong configuration  appDirectory=.
+2025-12-04T15:31:14.5784690Z   • description is missed in the package.json  appPackageFile=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/package.json
+2025-12-04T15:31:14.5785970Z   • author is missed in the package.json  appPackageFile=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/package.json
+2025-12-04T15:31:14.7623120Z [beforePack] appDir: /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron
+2025-12-04T15:31:14.7624060Z [beforePack] package.json main: main.js
+2025-12-04T15:31:14.7625620Z [beforePack] main.js exists: false
+2025-12-04T15:31:14.7626210Z [beforePack] dist/index.html exists: true
+2025-12-04T15:31:14.7633580Z [beforePack] appDir entries: [
+2025-12-04T15:31:14.7633870Z   'build-hooks',
+2025-12-04T15:31:14.7634130Z   'dist',
+2025-12-04T15:31:14.7634510Z   'node_modules',
+2025-12-04T15:31:14.7634830Z   'package-lock.json',
+2025-12-04T15:31:14.7635630Z   'package.json'
+2025-12-04T15:31:14.7635960Z ]
+2025-12-04T15:31:14.7644860Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 node-dep-tree --dir /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron
+2025-12-04T15:31:14.8263300Z   • exited          command=app-builder_arm64 code=0 pid=4437 out=[]
+2025-12-04T15:31:14.8273250Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 rebuild-node-modules cwd=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron
+2025-12-04T15:31:14.8362360Z   • no native dependencies  
+2025-12-04T15:31:14.8368280Z   • exited          command=app-builder_arm64 code=0 pid=4438
+2025-12-04T15:31:14.8369690Z   • packaging       platform=darwin arch=arm64 electron=31.7.7 appOutDir=dist/mac-arm64
+2025-12-04T15:31:14.8377090Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 unpack-electron --configuration [{"platform":"darwin","arch":"arm64","version":"31.7.7"}] --output /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64 --distMacOsAppName Electron.app
+2025-12-04T15:31:14.8463210Z   • map async       taskCount=2
+2025-12-04T15:31:14.8483160Z   • map async       taskCount=1
+2025-12-04T15:31:15.2633260Z   • computing effective URL  initialUrl=https://github.com/electron/electron/releases/download/v31.7.7/electron-v31.7.7-darwin-arm64.zip
+2025-12-04T15:31:15.2739010Z                              currentUrl=https://release-assets.githubusercontent.com/github-production-release-asset/9384267/b54286f8-e54a-4601-990a-f1c11732269e?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-12-04T16%3A13%3A08Z&rscd=attachment%3B+filename%3Delectron-v31.7.7-darwin-arm64.zip&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-12-04T15%3A12%3A34Z&ske=2025-12-04T16%3A13%3A08Z&sks=b&skv=2018-11-09&sig=rrUKRMbFJpzTyii6WjtuVql0xQqxtv6ungpm%2BLK%2FKeU%3D&jwt=***
+2025-12-04T15:31:15.3185880Z   • downloading     url=https://github.com/electron/electron/releases/download/v31.7.7/electron-v31.7.7-darwin-arm64.zip length=96569232 contentType=application/octet-stream
+2025-12-04T15:31:15.3288480Z   • downloading     url=https://github.com/electron/electron/releases/download/v31.7.7/electron-v31.7.7-darwin-arm64.zip size=97 MB parts=6
+2025-12-04T15:31:15.3390130Z   • map async       taskCount=6
+2025-12-04T15:31:15.3492680Z   • download part   range=bytes=80474360-96569231 index=5
+2025-12-04T15:31:15.3594040Z   • download part   range=bytes=32189744-48284615 index=2
+2025-12-04T15:31:15.3695740Z   • download part   range=bytes=0-16094871 index=0
+2025-12-04T15:31:15.3798590Z   • download part   range=bytes=16094872-32189743 index=1
+2025-12-04T15:31:15.3908030Z   • download part   range=bytes=64379488-80474359 index=4
+2025-12-04T15:31:15.4015810Z   • download part   range=bytes=48284616-64379487 index=3
+2025-12-04T15:31:15.9535040Z   • downloaded      url=https://github.com/electron/electron/releases/download/v31.7.7/electron-v31.7.7-darwin-arm64.zip duration=1.104s
+2025-12-04T15:31:15.9585280Z   • map async       taskCount=255
+2025-12-04T15:31:17.9212030Z   • exited          command=app-builder_arm64 code=0 pid=4439
+2025-12-04T15:31:18.5346390Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 decode-plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Electron.app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Electron.app/Contents/Frameworks/Electron Helper.app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Electron.app/Contents/Frameworks/Electron Helper EH.app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Electron.app/Contents/Frameworks/Electron Helper NP.app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Electron.app/Contents/Frameworks/Electron Helper (Renderer).app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Electron.app/Contents/Frameworks/Electron Helper (Plugin).app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Electron.app/Contents/Frameworks/Electron Helper (GPU).app/Contents/Info.plist -f /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Electron.app/Contents/Library/LoginItems/Electron Login Helper.app/Contents/Info.plist
+2025-12-04T15:31:18.5480540Z   • map async       taskCount=8
+2025-12-04T15:31:18.5503470Z   • exited          command=app-builder_arm64 code=0 pid=4453 out=[{"NSMainNibFile":"MainMenu","CFBundleDisplayName":"Electron","LSMinimumSystemVersion":"10.15","NSCameraUsageDescription":"This app needs access to the camera","DTXcodeBuild":"15F31d","LSEnvironment":{"MallocNanoZone":"0"},"NSBluetoothPeripheralUsageDescription":"This app needs access to Bluetooth","NSRequiresAquaSystemAppearance":false,"NSSupportsAutomaticGraphicsSwitching":true,"CFBundleIdentifier":"com.github.Electron","CFBundlePackageType":"APPL","CFBundleShortVersionString":"31.7.7","NSBluetoothAlwaysUsageDescription":"This app needs access to Bluetooth","NSPrincipalClass":"AtomApplication","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTSDKName":"macosx14.5","NSAppTransportSecurity":{"NSAllowsArbitraryLoads":true},"CFBundleName":"Electron","CFBundleVersion":"31.7.7","DTSDKBuild":"23F73","DTXcode":"1540","CFBundleExecutable":"Electron","LSApplicationCategoryType":"public.app-category.developer-tools","NSHighResolutionCapable":true,"NSMicrophoneUsageDescription":"This app needs access to the microphone","NSQuitAlwaysKeepsWindows":false,"CFBundleIconFile":"electron.icns","CFBundleInfoDictionaryVersion":"6.0","ElectronAsarIntegrity":{"Resources/default_app.asar":{"algorithm":"SHA256","hash":"47faa213e09c3fc3e66e46a45397ca910262eca97971cafa1eb53fcb2305264d"}}},{"CFBundlePackageType":"APPL","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTSDKBuild":"23F73","DTXcode":"1540","LSEnvironment":{"MallocNanoZone":"0"},"LSUIElement":true,"CFBundleIdentifier":"com.github.Electron.helper","CFBundleName":"Electron Helper","DTSDKName":"macosx14.5","DTXcodeBuild":"15F31d","NSSupportsAutomaticGraphicsSwitching":true},null,null,{"CFBundleIdentifier":"com.github.Electron.helper","DTSDKBuild":"23F73","DTXcode":"1540","LSUIElement":true,"DTXcodeBuild":"15F31d","LSEnvironment":{"MallocNanoZone":"0"},"NSSupportsAutomaticGraphicsSwitching":true,"CFBundleName":"Electron Helper (Renderer)","CFBundlePackageType":"APPL","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTSDKName":"macosx14.5"},{"DTSDKBuild":"23F73","DTXcode":"1540","LSUIElement":true,"CFBundleIdentifier":"com.github.Electron.helper","CFBundleName":"Electron Helper (Plugin)","CFBundlePackageType":"APPL","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTSDKName":"macosx14.5","DTXcodeBuild":"15F31d","LSEnvironment":{"MallocNanoZone":"0"},"NSSupportsAutomaticGraphicsSwitching":true},{"CFBundleName":"Electron Helper (GPU)","CFBundlePackageType":"APPL","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTXcode":"1540","NSSupportsAutomaticGraphicsSwitching":true,"CFBundleIdentifier":"com.github.Electron.helper","DTSDKBuild":"23F73","DTSDKName":"macosx14.5","DTXcodeBuild":"15F31d","LSEnvironment":{"MallocNanoZone":"0"},"LSUIElement":true},null]
+2025-12-04T15:31:18.5516260Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 icon --format icns --root /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build --root /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron --out /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/.icon-icns --input icon.icns
+2025-12-04T15:31:18.5628650Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build/icon.icns
+2025-12-04T15:31:18.5632020Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/icon.icns
+2025-12-04T15:31:18.5634490Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build/icon.icns
+2025-12-04T15:31:18.5636040Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/icon.icns
+2025-12-04T15:31:18.5638250Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build/icons
+2025-12-04T15:31:18.5639210Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/icons
+2025-12-04T15:31:18.5641700Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/build/icon.png
+2025-12-04T15:31:18.5674310Z   • path doesn't exist  path=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/icon.png
+2025-12-04T15:31:18.5676690Z   • no icons found, using provided fallback sources  
+2025-12-04T15:31:18.5677310Z   • exited          command=app-builder_arm64 code=0 pid=4454 out={"icons":null,"isFallback":true}
+2025-12-04T15:31:18.5678390Z   • default Electron icon is used  reason=application icon is not set
+2025-12-04T15:31:18.5679390Z   • spawning        command=/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-bin/mac/app-builder_arm64 encode-plist
+2025-12-04T15:31:18.5773010Z   • map async       taskCount=5
+2025-12-04T15:31:18.6216940Z   • exited          command=app-builder_arm64 code=0 pid=4455
+2025-12-04T15:31:18.6381580Z   • getPublishConfigsForUpdateInfo: no publishConfigs, detect using repository info
+2025-12-04T15:31:18.6386150Z [afterPack] platform: darwin arch: 3
+2025-12-04T15:31:18.6386870Z [afterPack] appOutDir: /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64
+2025-12-04T15:31:18.6387570Z [afterPack] appOutDir entries: [ 'Forschungsdaten-Analyseplattform.app' ]
+2025-12-04T15:31:18.6388490Z [afterPack] .app path: /Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Forschungsdaten-Analyseplattform.app
+2025-12-04T15:31:18.6389350Z [afterPack] Resources/app exists: false
+2025-12-04T15:31:18.6389810Z [afterPack] Resources/app/main.js exists: false
+2025-12-04T15:31:18.6390870Z [afterPack] Resources/app/dist/index.html exists: false
+2025-12-04T15:31:18.6391320Z [afterPack] Resources/app.asar exists: true
+2025-12-04T15:31:18.6393460Z [afterPack] app.asar package.json main: main.js
+2025-12-04T15:31:18.6395170Z [afterPack] app.asar has top-level main.js: false
+2025-12-04T15:31:18.6395660Z [afterPack] app.asar has declared main path: false
+2025-12-04T15:31:18.6396020Z [afterPack] app.asar has dist/index.html: true
+2025-12-04T15:31:18.6616390Z   ⨯ Application entry file "main.js" in the "/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Forschungsdaten-Analyseplattform.app/Contents/Resources/app.asar" does not exist. Seems like a wrong configuration.  failedTask=build stackTrace=Error: Application entry file "main.js" in the "/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron-dist/mac-arm64/Forschungsdaten-Analyseplattform.app/Contents/Resources/app.asar" does not exist. Seems like a wrong configuration.
+2025-12-04T15:31:18.6624750Z     at error (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/asar/asarFileChecker.ts:7:12)
+2025-12-04T15:31:18.6629040Z     at checkFileInArchive (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/asar/asarFileChecker.ts:31:11)
+2025-12-04T15:31:18.6631840Z     at MacPackager.checkFileInPackage (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/platformPackager.ts:514:7)
+2025-12-04T15:31:18.6634840Z     at MacPackager.sanityCheckPackage (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/platformPackager.ts:562:5)
+2025-12-04T15:31:18.6637990Z     at MacPackager.doPack (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/platformPackager.ts:319:5)
+2025-12-04T15:31:18.6641170Z     at MacPackager.pack (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/macPackager.ts:198:9)
+2025-12-04T15:31:18.6671330Z     at Packager.doBuild (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/packager.ts:445:9)
+2025-12-04T15:31:18.6672390Z     at executeFinally (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/builder-util/src/promise.ts:12:14)
+2025-12-04T15:31:18.6673380Z     at Packager._build (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/packager.ts:379:31)
+2025-12-04T15:31:18.6675030Z     at Packager.build (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/app-builder-lib/src/packager.ts:340:12)
+2025-12-04T15:31:18.6677510Z     at executeFinally (/Users/runner/work/experiment-eye-40129/experiment-eye-40129/electron/node_modules/builder-util/src/promise.ts:12:14)
+2025-12-04T15:31:18.7208990Z ##[error]Process completed with exit code 1.
+2025-12-04T15:31:18.7419080Z Post job cleanup.
+2025-12-04T15:31:19.0811250Z [command]/opt/homebrew/bin/git version
+2025-12-04T15:31:19.1030320Z git version 2.50.1
+2025-12-04T15:31:19.1073460Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/67e528fc-f924-435a-a281-74b8363fabc0/.gitconfig'
+2025-12-04T15:31:19.1084220Z Temporarily overriding HOME='/Users/runner/work/_temp/67e528fc-f924-435a-a281-74b8363fabc0' before making global git config changes
+2025-12-04T15:31:19.1085380Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-04T15:31:19.1098490Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/experiment-eye-40129/experiment-eye-40129
+2025-12-04T15:31:19.1375740Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-12-04T15:31:19.1443570Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-12-04T15:31:19.2328920Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-04T15:31:19.2381690Z http.https://github.com/.extraheader
+2025-12-04T15:31:19.2391140Z [command]/opt/homebrew/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-12-04T15:31:19.2455990Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-12-04T15:31:19.3525370Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-04T15:31:19.3669910Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2025-12-04T15:31:19.4348870Z Cleaning up orphan processes
