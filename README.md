@@ -88,6 +88,22 @@ Hinweise:
 - Ohne Signierung kann Gatekeeper blockieren – App öffnen via Rechtsklick → Öffnen.
 - Die Electron-App lädt `dist/index.html` direkt via `file://`, somit sind keine Netzwerkverbindungen nötig.
 
+## Desktop: Tauri (macOS)
+
+Für eine schlanke, systemnahe macOS‑App nutzen wir Tauri v1.
+
+- Frontend bauen: `npm run build`
+- Lokaler Build (macOS erforderlich):
+  - Rust installieren (`rustup`), dann: `cargo install tauri-cli --locked --version 1.5.6`
+  - Build: `cargo tauri build`
+- GitHub Actions: Der Workflow `macos-tauri-build.yml` erzeugt DMGs und `.app`‑Bundles für `x86_64-apple-darwin` (Intel) und `aarch64-apple-darwin` (Apple Silicon). Artefakte heißen z. B. `tauri-x86_64-apple-darwin-dmg` und `tauri-aarch64-apple-darwin-dmg`.
+
+Hinweise:
+- Vite nutzt relative Pfade (`base: "./"` in Produktion), Daten liegen unter `./data` (siehe `src/config.ts`).
+- Bei der ersten Ausführung kann Gatekeeper blockieren. Entferne ggf. Quarantäne:
+  - `xattr -r -d com.apple.quarantine "/Applications/Forschungsdaten-Analyseplattform.app"`
+- Starte die App danach aus `/Applications`. Bei Problemen bitte die macOS‑Konsole/Fehlermeldung teilen.
+
 ### macOS Universal-Build via GitHub Actions (ohne eigenen Mac)
 
 Wenn du keinen Mac zur Verfügung hast, kannst du den Build in GitHub ausführen:

@@ -7,7 +7,10 @@ on:
 
 jobs:
   build-macos:
-    runs-on: macos-13
+    strategy:
+      matrix:
+        target: [ x86_64-apple-darwin, aarch64-apple-darwin ]
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,8 +23,11 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Add Rust target
+        run: rustup target add ${{ matrix.target }}
+
+      - name: Install dependencies (robust)
+        run: npm ci --no-audit --no-fund || npm install --no-audit --no-fund
 
       - name: Build frontend (Vite)
         run: npm run build
@@ -30,12 +36,16 @@ jobs:
         run: cargo install tauri-cli --locked --version 1.5.6
 
       - name: Build Tauri app (macOS)
-        run: cargo tauri build
+        run: cargo tauri build --target ${{ matrix.target }}
 
-      - name: Upload artifacts
+      - name: Upload artifacts (DMG)
         uses: actions/upload-artifact@v4
         with:
-          name: tauri-macos-artifacts
-          path: |
-            src-tauri/target/release/bundle/dmg/**
-            src-tauri/target/release/bundle/macos/**
+          name: tauri-${{ matrix.target }}-dmg
+          path: src-tauri/target/${{ matrix.target }}/release/bundle/dmg/**
+
+      - name: Upload artifacts (App bundle)
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-${{ matrix.target }}-app
+          path: src-tauri/target/${{ matrix.target }}/release/bundle/macos/**
