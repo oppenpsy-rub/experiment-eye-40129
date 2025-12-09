@@ -25,6 +25,23 @@ function createLogger() {
 }
 const log = createLogger();
 
+// Log build commit fingerprint if available (from bundled buildmeta.json)
+function readBuildMeta() {
+  try {
+    const p = path.join(__dirname, 'dist', 'buildmeta.json');
+    const s = fs.readFileSync(p, 'utf8');
+    const j = JSON.parse(s);
+    return j;
+  } catch {
+    return null;
+  }
+}
+try {
+  const meta = readBuildMeta();
+  const commit = (meta && meta.commit) || process.env.VITE_COMMIT_SHA || '(unknown)';
+  log('[build] commit (electron):', commit);
+} catch {}
+
 // Loosen CORS/file restrictions for local file:// ESM modules and assets
 try {
   app.commandLine.appendSwitch('allow-file-access-from-files');

@@ -25,6 +25,11 @@ jobs:
       - name: Ensure npm is up-to-date
         run: npm install -g npm@latest
 
+      - name: Inject commit fingerprint for build
+        run: |
+          echo "VITE_COMMIT_SHA=${{ github.sha }}" >> $GITHUB_ENV
+          echo "{ \"commit\": \"${{ github.sha }}\" }" > public/buildmeta.json
+
       - name: Install root dependencies
         run: |
           npm ci --no-audit --no-fund || npm install --no-audit --no-fund
