@@ -18,6 +18,9 @@ electron-dist/
 # Tauri build artifacts
 src-tauri/target/
 
+# Tauri runtime resources (local-only, do not track in Git)
+src-tauri/resources/webview2-fixed/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
