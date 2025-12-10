@@ -13,21 +13,29 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      {(typeof window !== "undefined" && window.location.protocol === "file:") ? (
-        <HashRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </HashRouter>
-      ) : (
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      )}
+      {(() => {
+        const isFile = typeof window !== "undefined" && window.location.protocol === "file:";
+        const isGhPages = typeof window !== "undefined" && /github\.io$/i.test(window.location.hostname);
+        const useHash = isFile || isGhPages || import.meta.env.PROD;
+        if (useHash) {
+          return (
+            <HashRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </HashRouter>
+          );
+        }
+        return (
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        );
+      })()}
     </TooltipProvider>
   </QueryClientProvider>
 );

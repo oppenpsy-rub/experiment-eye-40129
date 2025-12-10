@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - pwa-deploy
 
 permissions:
   contents: read
