@@ -123,6 +123,7 @@ export const MentalMapHeatmap = ({ mentalMapData, participantCodes }: MentalMapH
   const [selectedQuestion, setSelectedQuestion] = useState<string>('all');
   const initialQuestionSetRef = useRef<boolean>(false);
   const [showOutlines, setShowOutlines] = useState<boolean>(false);
+  const [outlineLevel, setOutlineLevel] = useState<"regions" | "departements" | "communes">("regions");
 const [gridSizeInput, setGridSizeInput] = useState<number>(0.05);
 const [gridSize, setGridSize] = useState<number>(0.05);
   const [smoothing, setSmoothing] = useState<boolean>(true);
@@ -136,6 +137,10 @@ const [gridSize, setGridSize] = useState<number>(0.05);
   const [smoothingStrength, setSmoothingStrength] = useState<number>(2);
   const frRegionsRef = useRef<any[] | null>(null);
   const frRegionsLoadingRef = useRef<boolean>(false);
+  const frDepartementsRef = useRef<any[] | null>(null);
+  const frDepartementsLoadingRef = useRef<boolean>(false);
+  const frCommunesRef = useRef<any[] | null>(null);
+  const frCommunesLoadingRef = useRef<boolean>(false);
 
   // Export-Helfer: SVG aus dem Overlay-Pane extrahieren
   const exportHeatmapSvg = () => {
@@ -545,20 +550,22 @@ const [gridSize, setGridSize] = useState<number>(0.05);
         mapClickHandlerRef.current = handler;
       }
 
-      if (showOutlines && overlaysRef.current) {
-        for (const feature of filteredFeatures) {
-          if (feature.geometry.type === 'Polygon' && mapRef.current) {
-            const coordinates = feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]] as [number, number]);
-            L.polygon(coordinates, {
-              color: '#000000',
-              fillColor: 'transparent',
-              fillOpacity: 0,
-              weight: 1,
-              opacity: 0.25,
-            }).addTo(overlaysRef.current);
-          }
-          await tick();
-          if (cancelled) return;
+      if (showOutlines && overlaysRef.current && mapRef.current) {
+        const addGeoLayer = (features: any[]) => {
+          const gj = { type: 'FeatureCollection', features } as any;
+          L.geoJSON(gj, { style: () => ({ color: '#000', weight: 0.8, opacity: 0.3, fillOpacity: 0 }) }).addTo(overlaysRef.current!);
+        };
+        if (outlineLevel === 'regions') {
+          await loadFranceRegions();
+          if (frRegionsRef.current) addGeoLayer(frRegionsRef.current);
+        } else if (outlineLevel === 'departements') {
+          await loadFranceDepartements();
+          if (frDepartementsRef.current) addGeoLayer(frDepartementsRef.current);
+        } else if (outlineLevel === 'communes') {
+          const map = mapRef.current;
+          if (map.getZoom() < 8) map.setZoom(8);
+          await loadFranceCommunes();
+          if (frCommunesRef.current) addGeoLayer(frCommunesRef.current);
         }
       }
 
@@ -650,6 +657,50 @@ const [gridSize, setGridSize] = useState<number>(0.05);
         } catch {}
       }
       frRegionsLoadingRef.current = false;
+    };
+
+    const loadFranceDepartements = async () => {
+      if (frDepartementsRef.current || frDepartementsLoadingRef.current) return;
+      frDepartementsLoadingRef.current = true;
+      const urls = [
+        '/data/france_departements.geojson',
+        'https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements.geojson',
+      ];
+      for (const u of urls) {
+        try {
+          const resp = await fetch(u, { headers: { 'Accept': 'application/json' } });
+          if (!resp.ok) continue;
+          const gj = await resp.json();
+          const feats = Array.isArray(gj?.features) ? gj.features : [];
+          if (feats.length > 0) {
+            frDepartementsRef.current = feats;
+            break;
+          }
+        } catch {}
+      }
+      frDepartementsLoadingRef.current = false;
+    };
+
+    const loadFranceCommunes = async () => {
+      if (frCommunesRef.current || frCommunesLoadingRef.current) return;
+      frCommunesLoadingRef.current = true;
+      const urls = [
+        '/data/france_communes.geojson',
+        'https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/communes.geojson',
+      ];
+      for (const u of urls) {
+        try {
+          const resp = await fetch(u, { headers: { 'Accept': 'application/json' } });
+          if (!resp.ok) continue;
+          const gj = await resp.json();
+          const feats = Array.isArray(gj?.features) ? gj.features : [];
+          if (feats.length > 0) {
+            frCommunesRef.current = feats;
+            break;
+          }
+        } catch {}
+      }
+      frCommunesLoadingRef.current = false;
     };
 
     const pointInPoly = (ptLng: number, ptLat: number, coords: any): boolean => {
@@ -744,7 +795,12 @@ const [gridSize, setGridSize] = useState<number>(0.05);
           lastFetchAtRef.current = now;
           try {
             const url = `https://nominatim.openstreetmap.org/reverse?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lng)}&format=jsonv2&zoom=12&addressdetails=1`;
-            const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
+            const resp = await fetch(url, {
+              headers: {
+                'Accept': 'application/json',
+                'User-Agent': 'Forschungsdaten-Analyseplattform/0.1 (macOS app)'
+              }
+            });
             if (!resp.ok) return;
             const data = await resp.json();
             const addr = data?.address || {};
@@ -949,10 +1005,7 @@ const [gridSize, setGridSize] = useState<number>(0.05);
             ))}
           </SelectContent>
         </Select>
-        <div className="flex items-center gap-2 ml-4">
-          <Checkbox id="outlines" checked={showOutlines} onCheckedChange={(v) => setShowOutlines(!!v)} />
-          <Label htmlFor="outlines" className="text-sm">Polygone anzeigen</Label>
-        </div>
+        
         <div className="flex items-center gap-2 ml-4">
           <Checkbox id="smoothing" checked={smoothing} onCheckedChange={(v) => setSmoothing(!!v)} />
           <Label htmlFor="smoothing" className="text-sm">Glätten</Label>

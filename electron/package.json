@@ -21,7 +21,13 @@
     "afterPack": "./build-hooks/afterPack.js",
     "asar": true,
     "files": [
-      "**/*"
+      "dist/**",
+      "main.js",
+      "package.json",
+      "icon.icns",
+      "!**/*.map",
+      "!**/*.md",
+      "!**/node_modules/**"
     ],
     "win": {
       "target": [
@@ -41,6 +47,9 @@
       "unicode": true,
       "shortcutName": "Forschungsdaten-Analyseplattform",
       "runAfterFinish": true
+    },
+    "dmg": {
+      "format": "ULFO"
     },
     "mac": {
       "category": "public.app-category.education",

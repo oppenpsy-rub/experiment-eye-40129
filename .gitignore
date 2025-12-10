@@ -31,3 +31,6 @@ src-tauri/resources/webview2-fixed/
 *.njsproj
 *.sln
 *.sw?
+# Exclude sensitive public data from version control (except Canada provinces)
+public/data/*
+!public/data/canada_provinces.geojson
